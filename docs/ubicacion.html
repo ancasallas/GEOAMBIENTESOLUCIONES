@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Mapa Bogotá - Leaflet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Estilos de Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <style>
+        #map {
+            height: 100vh; /* mapa ocupa toda la pantalla */
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <!-- Librería Leaflet -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Coordenadas de la Plaza de Bolívar
+        const centro = [4.5981, -74.0760];
+
+        // Crear el mapa
+        const map = L.map('map').setView(centro, 16);
+
+        // Capa base (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Marcador
+        L.marker(centro)
+            .addTo(map)
+            .bindPopup('📍 Plaza de Bolívar, Bogotá')
+            .openPopup();
+    </script>
+</body>
+</html>
