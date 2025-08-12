@@ -1,0 +1,21 @@
+/* estilos.css */
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f4f4f4;
+}
+
+h1 {
+  margin: 20px 0;
+  color: #333;
+}
+
+#map {
+  height: 90vh;
+  width: 100%;
+  border: 2px solid #333;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
