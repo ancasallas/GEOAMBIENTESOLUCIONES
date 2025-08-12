@@ -2,12 +2,38 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Mapa Bogotá - Leaflet</title>
+    <title>Ubicación del Barrio El Vergel Oriental en Bogotá D.C.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Estilos de Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <style>
+        /* Estilos generales */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        /* Estilos para el encabezado */
+        header {
+            background-color: #F6F2EF;
+            color: green;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        header img {
+            width: 70px;
+            vertical-align: middle;
+            margin-right: 15px;
+        }
+
+        header h1 {
+            display: inline;
+            vertical-align: middle;
+        }
+
+        /* Estilos para el mapa */
         #map {
             height: 100vh; /* mapa ocupa toda la pantalla */
             width: 100%;
@@ -15,16 +41,26 @@
     </style>
 </head>
 <body>
+
+    <!-- Encabezado con logo y título -->
+    <header>
+        <img src="Logo GeoAmbientes.png" alt="Logo">
+        <h1>Ubicación del Barrio El Vergel Oriental en Bogotá D.C.</h1>
+    </header>
+
+    <!-- Contenedor del mapa -->
     <div id="map"></div>
 
     <!-- Librería Leaflet -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Librería jQuery para cargar archivo GeoJSON -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        // Coordenadas Barrio Vergel Occidental
+        // Coordenadas Barrio El Vergel Oriental
         const centro = [4.6528628395667795, -74.13169681192535];
 
         // Crear el mapa
-        const map = L.map('map').setView(centro, 16);
+        const map = L.map('map').setView(centro, 12);
 
         // Capa base (OpenStreetMap)
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -35,8 +71,23 @@
         // Marcador
         L.marker(centro)
             .addTo(map)
-            .bindPopup('📍 Plaza de Bolívar, Bogotá')
+            .bindPopup('El Vergel Oriental')
             .openPopup();
+
+        // Estilo de los polígonos (relleno gris con transparencia y borde gris más oscuro)
+        var estiloPoligono = {
+            fillColor: "#D4D1C7",       // Gris claro para el relleno
+            fillOpacity: 0.8,           // Transparencia del 80%
+            color: "#505050",           // Gris más oscuro para el borde
+            weight: 1,                  // Grosor del borde
+            opacity: 1                  // Opacidad del borde
+        };
+        // Cargar el archivo GeoJSON
+        $.getJSON('poligonos-localidades (1).geojson', function(data) {
+            L.geoJSON(data, {
+                style: estiloPoligono
+            }).addTo(map);
+        });
     </script>
 </body>
 </html>
