@@ -1,7 +1,7 @@
 // programa.js
 
 // Inicializar el mapa centrado en Colombia
-const map = L.map('map').setView([4.628207228952713, -74.06605914084012], 16);
+const map = L.map('map').setView([4.628207228952713, -74.06605914084012], 18);
 
 // Cargar la capa base de OpenStreetMap
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
