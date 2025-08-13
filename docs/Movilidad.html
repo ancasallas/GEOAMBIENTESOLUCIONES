@@ -100,10 +100,14 @@
             map.fitBounds(bounds);
         });
 
-        // Cargar el archivo GeoJSON de puntos (marcadores)
+        // Cargar el archivo GeoJSON de puntos (marcadores) y añadir los popups
         $.getJSON('RUTAS.geojson', function(data) {
             L.geoJSON(data, {
                 onEachFeature: function (feature, layer) {
+                    if (feature.properties && feature.properties.direcc_par) {
+                        // Agrega un popup con el atributo "direcc_par" al hacer clic en el marcador
+                        layer.bindPopup("Dirección: " + feature.properties.direcc_par);
+                    }
                     if (feature.properties && feature.properties.name) {
                         layer.bindPopup("<strong>" + feature.properties.name + "</strong>");
                     }
@@ -116,4 +120,5 @@
     </script>
 </body>
 </html>
+
 
