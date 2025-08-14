@@ -4,121 +4,29 @@
     <meta charset="utf-8">
     <title>Rutas del SITP</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- Estilos de Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-    <style>
-        /* Estilos generales */
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-        
-        /* Estilos para el encabezado */
-        header {
-            background-color: #F6F2EF;
-            color: green;
-            padding: 15px 0;
-            text-align: center;
-        }
-
-        header img {
-            width: 70px;
-            vertical-align: middle;
-            margin-right: 15px;
-        }
-
-        header h1 {
-            display: inline;
-            vertical-align: middle;
-        }
-
-        /* Estilos para el subtítulo */
-        #subtitulo {
-            text-align: left;
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
-            padding-left: 10px;
-            margin-top: 5px;
-        }
-
-        /* Estilos para el mapa */
-        #map {
-            height: 100vh;
-            width: 100%;
-        }
-    </style>
+    
+    <!-- Tu hoja de estilos -->
+    <link rel="stylesheet" href="Movilidadestilos.css">
 </head>
 <body>
 
-    <!-- Encabezado con logo y título -->
     <header>
         <img src="Logo GeoAmbientes.png" alt="Logo">
         <h1>Movilidad</h1>
-        <!-- Subtítulo alineado a la izquierda -->
         <div id="subtitulo">Rutas del SITP</div>
     </header>
 
-    <!-- Contenedor del mapa -->
     <div id="map"></div>
 
     <!-- Librería Leaflet -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <!-- Librería jQuery para cargar archivo GeoJSON -->
+    <!-- Librería jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        // Coordenadas Barrio El Vergel Oriental
-        const centro = [4.647147618123139, -74.14456010441765];
-
-        // Crear el mapa
-        const map = L.map('map').setView(centro, 12);
-
-        // Capa base (OpenStreetMap)
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(map);
-
-        // Estilo de los polígonos (relleno gris con transparencia y borde gris más oscuro)
-        var estiloPoligono = {
-            fillColor: "#D4D1C7",       
-            fillOpacity: 0.8,           
-            color: "#505050",           
-            weight: 1,                  
-            opacity: 1                  
-        };
-
-        // Cargar el archivo GeoJSON de polígonos
-        $.getJSON('BARRIO.geojson', function(data) {
-            var geojsonLayer = L.geoJSON(data, {
-                style: estiloPoligono
-            }).addTo(map);
-
-            // Hacer un zoom en el polígono cargado
-            var bounds = geojsonLayer.getBounds();
-            map.fitBounds(bounds);
-        });
-
-        // Cargar el archivo GeoJSON de puntos (marcadores) y añadir los popups
-        $.getJSON('RUTAS.geojson', function(data) {
-            L.geoJSON(data, {
-                onEachFeature: function (feature, layer) {
-                    if (feature.properties && feature.properties.direcc_par) {
-                        // Agrega un popup con el atributo "direcc_par" al hacer clic en el marcador
-                        layer.bindPopup("Dirección: " + feature.properties.direcc_par);
-                    }
-                    if (feature.properties && feature.properties.name) {
-                        layer.bindPopup("<strong>" + feature.properties.name + "</strong>");
-                    }
-                },
-                pointToLayer: function (feature, latlng) {
-                    return L.marker(latlng); // Crear un marcador para cada punto
-                }
-            }).addTo(map);
-        });
-    </script>
+    
+    <!-- Tu archivo JS -->
+    <script src="MovilidadPrograma.js"></script>
 </body>
 </html>
-
-

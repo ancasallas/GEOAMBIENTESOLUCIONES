@@ -1,0 +1,40 @@
+/* Estilos generales */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilos para el encabezado */
+header {
+    background-color: #F6F2EF;
+    color: green;
+    padding: 15px 0;
+    text-align: center;
+}
+
+header img {
+    width: 70px;
+    vertical-align: middle;
+    margin-right: 15px;
+}
+
+header h1 {
+    display: inline;
+    vertical-align: middle;
+}
+
+/* Estilos para el subtítulo */
+#subtitulo {
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    padding-left: 10px;
+    margin-top: 5px;
+}
+
+/* Estilos para el mapa */
+#map {
+    height: 100vh;
+    width: 100%;
+}
