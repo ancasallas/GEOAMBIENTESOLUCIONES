@@ -29,20 +29,83 @@ $.getJSON('BARRIO.geojson', function(data) {
     var bounds = geojsonLayer.getBounds();
     map.fitBounds(bounds);
 });
-
 // Cargar el archivo GeoJSON de puntos (marcadores) y añadir los popups
 $.getJSON('RUTAS.geojson', function(data) {
-    L.geoJSON(data, {
-        onEachFeature: function (feature, layer) {
-            if (feature.properties && feature.properties.direcc_par) {
-                layer.bindPopup("Dirección: " + feature.properties.direcc_par);
-            }
-            if (feature.properties && feature.properties.name) {
-                layer.bindPopup("<strong>" + feature.properties.name + "</strong>");
-            }
-        },
-        pointToLayer: function (feature, latlng) {
-            return L.marker(latlng); // Crear un marcador para cada punto
-        }
-    }).addTo(map);
+
+  function filenameFromCenefa(cenefa) {
+    if (!cenefa) return null;
+    let name = String(cenefa).trim();
+    if (!/\.(png|jpg|jpeg|webp|gif)$/i.test(name)) name += '.png'; // por defecto .png
+    return name;
+  }
+
+  L.geoJSON(data, {
+    pointToLayer: (feature, latlng) => L.marker(latlng),
+
+    onEachFeature: (feature, layer) => {
+      const p = feature.properties || {};
+      const file = filenameFromCenefa(p.cenefa);
+
+      // Contenedor del popup (HTMLElement → permite manejar onerror con JS)
+      const cont = document.createElement('div');
+      cont.style.maxWidth = '280px';
+
+      const titulo = document.createElement('div');
+      titulo.style.fontWeight = '600';
+      titulo.textContent = p.name || p.cenefa || 'Punto';
+      cont.appendChild(titulo);
+
+      if (p.direcc_par) {
+        const dir = document.createElement('div');
+        dir.style.margin = '4px 0';
+        dir.textContent = `Dirección: ${p.direcc_par}`;
+        cont.appendChild(dir);
+      }
+
+      if (file) {
+        const img = document.createElement('img');
+        img.alt = p.cenefa || '';
+        img.style.cssText = 'width:100%;height:auto;border-radius:6px;margin-top:6px;display:block';
+
+        // 1er intento: docs/<archivo>
+        const src1 = `docs/${file}`;
+        // 2do intento: <archivo> (misma carpeta del HTML)
+        const src2 = `${file}`;
+
+        img.src = src1;
+        img.onerror = function () {
+          if (img.src.endsWith(src1)) {
+            // probar ruta alternativa
+            img.src = src2;
+          } else {
+            const note = document.createElement('div');
+            note.style.color = '#888';
+            note.textContent = `Imagen no encontrada: ${file}`;
+            img.replaceWith(note);
+          }
+        };
+
+        // (opcional) enlace para abrir la imagen en pestaña nueva
+        const a = document.createElement('a');
+        a.href = src1;            // el href inicial será src1
+        a.target = '_blank';
+        a.rel = 'noopener';
+        // si cambió a src2, actualizamos el href también
+        img.addEventListener('load', () => { a.href = img.src; });
+        img.addEventListener('error', () => { a.href = img.src; });
+
+        a.appendChild(img);
+        cont.appendChild(a);
+      } else {
+        const note = document.createElement('div');
+        note.style.color = '#888';
+        note.textContent = 'Sin imagen asociada';
+        cont.appendChild(note);
+      }
+
+      layer.bindPopup(cont, { maxWidth: 320 });
+    }
+  }).addTo(map);
 });
+
+
