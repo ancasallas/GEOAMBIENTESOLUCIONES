@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;  /* Centrado horizontal */
+    align-items: center;      /* Centrado vertical */
+    font-family: 'Sacramento', cursive;  /* Cambiar a Sacramento */
+    background-image: url('fondo.jpg');  /* Imagen de fondo */
+    background-size: cover;  
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.contenedor {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.7);  /* Fondo semi-transparente */
+    border-radius: 10px;
+}
+
+h1 {
+    font-size: 4rem;
+    color: #2C3E50;
+}
