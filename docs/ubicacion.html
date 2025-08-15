@@ -4,53 +4,45 @@
     <meta charset="utf-8">
     <title>Ubicación</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <!-- Estilos de Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-    
-   <style>
-        /* Estilos generales */
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-        }
-        /* Cambiar el estilo del popup */
-        .leaflet-popup-content {
-            font-family: 'Segoe UI', sans-serif;  /* Cambiar la fuente de popup */
-            font-size: 10px;                   /* Cambiar el tamaño de la fuente de popup */
-            font-weight: bold;                /* Poner en negrilla la fuente de popup */
-        }
-        /* Estilos para el encabezado */
-        header {
-            background-color: #F6F2EF;
-            color: green;
-            padding: 8px 0;
-            text-align: center;
-        }
-        header img {
-            width: 90px;
-            vertical-align: middle;
-            margin-right: 3px;
-        }
-        header h1 {
-            display: inline;
-            vertical-align: middle;
-        }
-        /* Estilos para el mapa */
-        #map {
-            height: 90vh; /* mapa ocupa toda la pantalla */
-            width: 100%;
-        }
-    </style>
+    <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-
-    <!-- Encabezado con logo y título -->
+   <!-- Encabezado con logo y título -->
     <header>
         <img src="Logo GeoAmbientes.png" alt="Logo">
-        <h1>Ubicación del barrio en Bogotá D.C.</h1>
+        <h1>GeoAmbientales Soluciones LTDA</h1>
     </header>
-
+    <!-- Menú Desplegable -->
+    <nav>
+        <ul class="menu">
+            <li class="menu-item">
+                <a href="#">Lugares</a>
+                <ul class="submenu">
+                    <li><a href="#">Lugar 1</a></li>
+                    <li><a href="#">Lugar 2</a></li>
+                    <li><a href="#">Lugar 3</a></li>
+                </ul>
+            </li>
+            <li class="menu-item">
+                <a href="#">Situaciones</a>
+                <ul class="submenu">
+                    <li><a href="#">Situación 1</a></li>
+                    <li><a href="#">Situación 2</a></li>
+                    <li><a href="#">Situación 3</a></li>
+                </ul>
+            </li>
+            <li class="menu-item">
+                <a href="#">Acerca de</a>
+                <ul class="submenu">
+                    <li><a href="#">Información 1</a></li>
+                    <li><a href="#">Información 2</a></li>
+                    <li><a href="#">Información 3</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
     <!-- Contenedor del mapa -->
     <div id="map"></div>
 

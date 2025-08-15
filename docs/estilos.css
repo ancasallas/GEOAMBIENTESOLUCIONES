@@ -1,21 +1,93 @@
 /* estilos.css */
 
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background-color: #f4f4f4;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-h1 {
-  margin: 20px 0;
-  color: #333;
+/* Estilos para el encabezado */
+header {
+    background-color: #F6F2EF;
+    color: rgb(0, 0, 0);
+    padding: 15px 0;
+    text-align: center;
 }
 
-#map {
-  height: 90vh;
-  width: 100%;
-  border: 2px solid #333;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  margin-bottom: 20px;
+header img {
+    width: 150px; /* Logo agrandado a 150px */
+    vertical-align: middle;
+    margin-right: 15px;
 }
+
+header h1 {
+    display: inline;
+    vertical-align: middle;
+}
+
+/* Estilos para el menú desplegable */
+nav {
+    background-color: #333;
+    padding: 10px;
+}
+
+.menu {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-item {
+    position: relative;
+    padding: 10px 20px;
+}
+
+.menu-item > a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.menu-item:hover > a {
+    background-color: #444;
+}
+
+.submenu {
+    display: none;
+    list-style-type: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #333;
+    width: 200px;
+    padding: 0;
+}
+
+.submenu li {
+    padding: 10px;
+}
+
+.submenu li a {
+    color: white;
+    text-decoration: none;
+}
+
+.submenu li a:hover {
+    background-color: #555;
+}
+
+.menu-item:hover .submenu {
+    display: block;
+}
+/* Estilos para el mapa */
+        #map {
+            height: 90vh; /* mapa ocupa toda la pantalla */
+            width: 100%;
+        }
+/* Cambiar el estilo del popup */
+        .leaflet-popup-content {
+            font-family: 'Segoe UI', sans-serif;  /* Cambiar la fuente de popup */
+            font-size: 10px;                   /* Cambiar el tamaño de la fuente de popup */
+            font-weight: bold;                /* Poner en negrilla la fuente de popup */
+        }
