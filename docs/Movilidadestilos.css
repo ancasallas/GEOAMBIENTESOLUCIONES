@@ -1,7 +1,93 @@
-/* Estilos generales */
-body {
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     font-family: Arial, sans-serif;
+    background-color: #f1f1f1; /* Fondo de la página */
+}
+
+/* Estilos para el encabezado */
+header {
+    background-color: #F6F2EF;
+    color: green;
+    padding: 15px 0;
+    text-align: center;
+}
+
+header img {
+    width: 150px; /* Logo agrandado a 150px */
+    vertical-align: middle;
+    margin-right: 15px;
+}
+
+header h1 {
+    display: inline;
+    vertical-align: middle;
+}
+
+/* Estilos para el menú desplegable */
+nav {
+    background-color: #333;
+    padding: 10px;
+}
+
+.menu {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-item {
+    position: relative;
+    padding: 10px 20px;
+}
+
+.menu-item > a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.menu-item:hover > a {
+    background-color: #444;
+}
+
+.submenu {
+    display: none;
+    list-style-type: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #333;
+    width: 200px;
+    padding: 0;
+}
+
+.submenu li {
+    padding: 10px;
+}
+
+.submenu li a {
+    color: white;
+    text-decoration: none;
+}
+
+.submenu li a:hover {
+    background-color: #555;
+}
+
+.menu-item:hover .submenu {
+    display: block;
 }
 
 /* Estilos para el encabezado */
