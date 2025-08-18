@@ -121,7 +121,7 @@ nav {
   display: block;
 }
 
-/* ===== Título debajo del menú ===== */
+/* ===== Título debajo del menú sin fondo ===== */
 #subtitulo {
   text-align: center;
   font-size: 20px;
@@ -130,6 +130,7 @@ nav {
   letter-spacing: 0.5px;
   color: #3a3a3a;
   margin: 30px 0 15px;
+  /* Sin fondo ni padding extra */
 }
 
 /* ===== Mapa ===== */

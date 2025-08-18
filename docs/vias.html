@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Vías Barrio El Vergel</title>
-    <link rel="stylesheet" href="est_vias.css" />
+    <link rel="stylesheet" href="estilos.css" />
 
     <!-- Leaflet CSS -->
     <link
@@ -39,41 +39,31 @@
     <!-- Encabezado con logo y título -->
     <header>
         <img src="Logo GeoAmbientes.png" alt="Logo" />
-        <h1>GeoAmbientes Soluciones LTDA</h1>
+        <h1>GeoAmbientes Soluciones </h1>
     </header>
 
     <!-- Menú Desplegable -->
     <nav>
         <ul class="menu">
-            <li class="menu-item">
-                <a href="#">Lugares</a>
-                <ul class="submenu">
-                    <li><a href="#">Lugar 1</a></li>
-                    <li><a href="#">Lugar 2</a></li>
-                    <li><a href="#">Lugar 3</a></li>
-                </ul>
-            </li>
-            <li class="menu-item">
-                <a href="#">Situaciones</a>
-                <ul class="submenu">
-                    <li><a href="#">Situación 1</a></li>
-                    <li><a href="#">Situación 2</a></li>
-                    <li><a href="#">Situación 3</a></li>
-                </ul>
-            </li>
-            <li class="menu-item">
-                <a href="#">Acerca de</a>
-                <ul class="submenu">
-                    <li><a href="#">Información 1</a></li>
-                    <li><a href="#">Información 2</a></li>
-                    <li><a href="#">Información 3</a></li>
-                </ul>
-            </li>
+        <li class="menu-item"><a href="index.html">Inicio</a></li>
+        <li class="menu-item has-submenu">
+            <a href="#">Equipamientos</a>
+            <ul class="submenu">
+            <li><a href="#">Ubicación</a></li>
+            <li><a href="Movilidad.html">Movilidad</a></li>
+            <li><a href="#">Parques</a></li>
+            <li><a href="Catastro3D.html">Catastro 3D</a></li>
+            <li><a href="tour_persona.html">Recorrido virtual</a></li>
+            <li><a href="vias.html">Vías</a></li>
+            </ul>
+        </li>
+        <li class="menu-item"><a href="#">Problemáticas</a></li>
+        <li class="menu-item"><a href="#">Acerca de</a></li>
         </ul>
     </nav>
 
     <!-- Título del mapa debajo del menú -->
-    <div class="map-title">VÍAS BARRIO EL VERGEL</div>
+    <div id="subtitulo">VÍAS BARRIO EL VERGEL</div>
 
     <!-- Contenedor del mapa -->
     <div id="map"></div>
