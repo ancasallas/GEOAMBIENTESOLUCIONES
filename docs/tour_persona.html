@@ -1,39 +1,65 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
   <title>Recorrido con persona – Barrio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="tour_persona.css" />
+
   <!-- CesiumJS 1.132 -->
   <script src="https://cesium.com/downloads/cesiumjs/releases/1.132/Build/Cesium/Cesium.js"></script>
   <link href="https://cesium.com/downloads/cesiumjs/releases/1.132/Build/Cesium/Widgets/widgets.css" rel="stylesheet" />
-
-  <style>
-    html, body, #cesiumContainer { width: 100%; height: 100%; margin: 0; padding: 0; }
-    .toolbar {
-      position: absolute; z-index: 10; top: 12px; left: 12px;
-      background: rgba(0,0,0,.55); color: #fff; padding: 10px 12px; border-radius: 10px;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      backdrop-filter: blur(4px);
-    }
-    .toolbar button, .toolbar input[type="range"] { margin-right: 8px; }
-    .toolbar .label { font-size: 12px; opacity: .9; margin-left: 6px; }
-  </style>
 </head>
 <body>
-  <div id="cesiumContainer"></div>
+  <main class="layout">
+    <!-- ===== Encabezado ===== -->
+    <header>
+      <img src="Logo GeoAmbientes.png" alt="Logo">
+      <h1>GeoAmbientes Soluciones LTDA</h1>
+    </header>
 
-  <div class="toolbar">
-    <button id="btnPlay">▶️ Play</button>
-    <button id="btnPause">⏸️ Pausa</button>
-    <button id="btnReset">🔄 Reiniciar</button>
-    <label class="label">Velocidad:
-      <input id="speed" type="range" min="0.2" max="5" step="0.1" value="1">
-      <span id="speedVal">1×</span>
-    </label>
-  </div>
+    <!-- ===== Menú ===== -->
+    <nav>
+      <ul class="menu">
+        <li class="menu-item"><a href="#">Inicio</a></li>
+        <li class="menu-item has-submenu">
+          <a href="#">Equipamientos</a>
+          <ul class="submenu">
+            <li><a href="#">Ubicación</a></li>
+            <li><a href="Movilidad.html">Movilidad</a></li>
+            <li><a href="#">Parques</a></li>
+            <li><a href="Catastro3D.html">Catastro 3D</a></li>
+            <li><a href="tour_persona.html">Recorrido virtual</a></li>
+            <li><a href="#">Vías</a></li>
+          </ul>
+        </li>
+        <li class="menu-item"><a href="#">Problemáticas</a></li>
+        <li class="menu-item"><a href="#">Acerca de</a></li>
+      </ul>
+    </nav>
 
+    <!-- ===== Título de sección ===== -->
+    <h2 id="subtitulo">Recorrido virtual</h2>
+
+    <!-- ===== Visor Cesium ===== -->
+    <div id="cesiumContainer">
+      <!-- Toolbar dentro del visor para que quede por encima del canvas -->
+      <div class="toolbar">
+        <button id="btnPlay">▶️ Play</button>
+        <button id="btnPause">⏸️ Pausa</button>
+        <button id="btnReset">🔄 Reiniciar</button>
+        <label class="label">Velocidad:
+          <input id="speed" type="range" min="0.2" max="5" step="0.1" value="1">
+          <span id="speedVal">1×</span>
+        </label>
+      </div>
+    </div>
+  </main>
+
+  <!-- Tu lógica de Cesium -->
   <script type="module" src="./tour_persona.js"></script>
 </body>
 </html>
+
