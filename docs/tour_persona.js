@@ -130,7 +130,7 @@ function lengthMeters(positions){
     if (pts && pts.length) raw.push(...pts);
   }
   if (raw.length < 2) {
-    bannerError("Vias_Vergel.geojson no tiene líneas válidas para el recorrido.");
+    bannerError("Ruta.geojson no tiene líneas válidas para el recorrido.");
     return;
   }
 

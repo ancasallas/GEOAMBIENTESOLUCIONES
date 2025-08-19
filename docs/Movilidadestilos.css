@@ -107,12 +107,29 @@ nav {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   color: #3a3a3a;
-  margin-top: 40px;   /* separación extra bajo el menú desplegable */
+  margin-top: 10px;   /* separación extra bajo el menú desplegable */
   margin-bottom: 15px;
+}
+.subtitulo-secundario {
+  display: inline-block;
+  padding: 12px 20px;
+  border: 3px solid #2e7d32; /* Verde */
+  border-radius: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2e7d32;
+  background: #f1f8f4;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.subtitulo-secundario .icono {
+  margin-right: 10px;
+  font-size: 1.6rem;
 }
 
 /* “Rutas del SITP”: alineado a la izquierda */
-#subtitulo-secundario {
+#subtitulo-Terciario {
   text-align: left;
   font-size: 15px;
   font-weight: 500;
@@ -128,3 +145,21 @@ nav {
   width: 100%;
   position: relative;
   z-index: 1;}
+  /* ===== Contacto ===== */
+footer.contacto {
+  background: #1b4332;
+  color: white;
+  padding: 25px 20px;
+  margin-top: 30px;
+  text-align: center;
+}
+
+footer.contacto h3 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+footer.contacto p {
+  margin: 5px 0;
+  font-size: 0.95rem;
+}

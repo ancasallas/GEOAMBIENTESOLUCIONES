@@ -147,4 +147,22 @@ nav {
   .menu-item > a { padding: 14px 18px; font-size: 14px; }
   #subtitulo { margin: 12px 0 8px; }
 }
+/* ===== Contacto ===== */
+footer.contacto {
+  background: #1b4332;
+  color: white;
+  padding: 25px 20px;
+  margin-top: 30px;
+  text-align: center;
+}
+
+footer.contacto h3 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+footer.contacto p {
+  margin: 5px 0;
+  font-size: 0.95rem;
+}
 
