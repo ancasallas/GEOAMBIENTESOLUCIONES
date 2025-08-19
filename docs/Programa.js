@@ -70,3 +70,38 @@ fetch(proxiedUrl)
     console.error('Error cargando capa WFS:', error);
     alert('No se pudo cargar la capa de calidad del aire');
   });
+// Capa WMS desde IBOCA
+L.tileLayer.wms("http://iboca.ambientebogota.gov.co:8080/geoserver/sda_ca/wms?", {
+  layers: 'sda_ca:PM10_promedio_anual',   // cambia la capa
+  format: 'image/png',
+  transparent: true,
+  attribution: "IBOCA - Secretaría Distrital de Ambiente"
+}).addTo(map);
+var wfsUrl = "https://cors-anywhere.herokuapp.com/http://iboca.ambientebogota.gov.co:8080/geoserver/sda_ca/ows?" +
+             "service=WFS&version=1.0.0&request=GetFeature" +
+             "&typeName=sda_ca:estaciones_calidad_aire&outputFormat=application/json";
+
+fetch(wfsUrl)
+  .then(r => r.json())
+  .then(data => {
+    L.geoJSON(data).addTo(map);
+  });
+fetch("estaciones.geojson")
+  .then(r => r.json())
+  .then(data => {
+    L.geoJSON(data).addTo(map);
+  });
+fetch("historico_estaciones.geojson")
+// Ajustar vista
+const ZOOM_KENNEDY = 20;
+  if (filtradas.length && capa.getBounds().isValid()) {
+    map.fitBounds(capa.getBounds(), { padding: [20, 20] });
+    console.info(`Se mostraron ${filtradas.length} elementos de la localidad Kennedy.`);
+  } else {
+    // Respaldo: centrar en Kennedy si no se halló el atributo de localidad
+    map.setView(CENTRO_KENNEDY, ZOOM_KENNEDY);
+    console.warn(
+      "No se encontraron features con localidad=Kennedy usando las claves conocidas. " +
+      "Se muestra el dataset completo y se centra el mapa en Kennedy."
+    );
+  }

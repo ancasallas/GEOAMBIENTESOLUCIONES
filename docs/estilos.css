@@ -12,14 +12,16 @@
 .contenedor {
   text-align: center;
   padding: 20px 40px;
-  background-color: rgba(255, 255, 255, 0.7);
-  border-radius: 10px;
+  /* Quitar fondo */
+  background-color: transparent; 
+  border-radius: 0; /* ya no se necesita borde redondeado */
 }
 
 .contenedor h1 {
   font-size: 4rem;
-  color: #2c3e50;
+  color: #ffffff; /* Letra blanca */
   margin: 0;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.6); /* Opcional: resalta el texto sobre el fondo */
 }
 
 body {
@@ -139,4 +141,21 @@ nav {
   width: 100%;
   position: relative;
   z-index: 1;
+}
+footer.contacto {
+  background: #1b4332;
+  color: white;
+  padding: 25px 20px;
+  margin-top: 30px;
+  text-align: center;
+}
+
+footer.contacto h3 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+footer.contacto p {
+  margin: 5px 0;
+  font-size: 0.95rem;
 }
