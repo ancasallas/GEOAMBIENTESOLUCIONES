@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Acerca de – GeoAmbientes Soluciones</title>
+
+  <!-- Estilos de esta página -->
+  <link rel="stylesheet" href="Acercade.css" />
+
+  <!-- Leaflet (para el History Map) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
+  <!-- Script de la línea de tiempo y mapa (en archivo aparte) -->
+  <script src="Acercade.js" defer></script>
+</head>
+<body>
+  <!-- ===== Encabezado ===== -->
+  <header class="site-header">
+    <img src="Logo GeoAmbientes.png" alt="Logo GeoAmbientes" />
+    <h1>GeoAmbientes Soluciones</h1>
+  </header>
+
+  <!-- ===== Menú ===== -->
+  <nav class="site-nav">
+    <ul class="menu">
+      <li class="menu-item"><a href="index.html">Inicio</a></li>
+      <li class="menu-item has-submenu">
+        <a href="#">Equipamientos</a>
+        <ul class="submenu">
+          <li><a href="#">Ubicación</a></li>
+          <li><a href="Movilidad.html">Movilidad</a></li>
+          <li><a href="#">Parques</a></li>
+          <li><a href="Catastro3D.html">Catastro 3D</a></li>
+          <li><a href="tour_persona.html">Recorrido virtual</a></li>
+          <li><a href="vias.html">Vías</a></li>
+        </ul>
+      </li>
+      <li class="menu-item"><a href="#">Problemáticas</a></li>
+      <li class="menu-item"><a href="Acercade.html" class="activo">Acerca de</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== H1 de la página ===== -->
+  <h2 id="subtitulo">Conócenos</h2>
+
+  <!-- ===== Sección: Historia + Misión/Visión/Valores ===== -->
+  <section class="about-grid">
+    <article class="about-card">
+      <h3>Historia de la empresa</h3>
+      <p>
+        <strong>GeoAmbientes Soluciones</strong> nació en 2018 como la unión de especialistas
+        en ingeniería ambiental y tecnologías geoespaciales. Empezamos realizando cartografía base
+        y monitoreo ambiental; hoy desarrollamos plataformas 3D, gemelos digitales y
+        analítica espacial para la toma de decisiones públicas y privadas.
+      </p>
+    </article>
+
+    <article class="about-card">
+      <h3>Misión</h3>
+      <p>
+        Generar soluciones geoespaciales integrales que impulsen la gestión territorial sostenible.
+      </p>
+
+      <h3>Visión</h3>
+      <p>
+        Ser referentes en Latinoamérica en innovación geoespacial aplicada al territorio.
+      </p>
+
+      <h3>Valores</h3>
+      <ul class="values">
+        <li>Innovación responsable</li>
+        <li>Sostenibilidad y ética</li>
+        <li>Trabajo colaborativo</li>
+        <li>Calidad técnica y transparencia</li>
+        <li>Compromiso con las comunidades</li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- ===== Equipo / Solución / Logros / CTA ===== -->
+  <section class="info-grid">
+    <article class="info-card">
+      <h3>Equipo</h3>
+      <p>
+        Contamos con ingenieros/as ambientales, expertos/as en SIG, desarrolladores/as,
+        especialistas en datos y coordinadores/as de proyecto.
+      </p>
+    </article>
+
+    <article class="info-card">
+      <h3>Solución de problemas</h3>
+      <p>
+        Ayudamos a instituciones y empresas a <strong>ver</strong> y <strong>entender</strong> su territorio:
+        catastro 3D, movilidad, gestión de riesgo, ordenamiento y monitoreo ambiental.
+      </p>
+    </article>
+
+    <article class="info-card">
+      <h3>Logros y reconocimientos</h3>
+      <ul class="bullets">
+        <li>Premio a la Innovación Pública Local (2021).</li>
+        <li>Finalistas en Reto de Ciudades Sostenibles (2023).</li>
+        <li>+60 proyectos ejecutados en 8 departamentos.</li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- ===== Historia: History Map ===== -->
+  <section class="history-wrap">
+    <h3 class="history-title">Nuestra historia en el territorio</h3>
+    <div class="history">
+      <div class="timeline">
+        <div class="timeline-years" id="yearsBar"></div>
+        <div class="timeline-card">
+          <h4 id="hitoTitulo">—</h4>
+          <p id="hitoTexto">Selecciona un año para ver el hito en el mapa.</p>
+        </div>
+      </div>
+      <div id="historyMap" aria-label="Mapa de hitos de GeoAmbientes"></div>
+    </div>
+  </section>
+
+  <!-- ===== Contacto ===== -->
+  <footer class="contacto">
+    <h3>GEOAMBIENTES SOLUCIONES</h3>
+    <p><strong>Dirección:</strong> Calle 45 # 20-15, Bogotá, Colombia</p>
+    <p><strong>Código postal:</strong> 111321</p>
+    <p><strong>Horarios de atención al ciudadano:</strong> Lunes a viernes de 8:00 a.m. a 4:30 p.m.</p>
+    <p><strong>Teléfono conmutador:</strong> +57 (601) 456 78 90 Ext.101 y 102</p>
+    <p><strong>Línea gratuita:</strong> 01-8000-112233</p>
+    <p><strong>Correo de contacto:</strong> servicio@geoambientes.com.co</p>
+    <p><strong>Radicación virtual:</strong> radicacion@geoambientes.com.co</p>
+    <p><strong>NIT:</strong> 901234567-8</p>
+  </footer>
+</body>
+</html>
+
+
+
