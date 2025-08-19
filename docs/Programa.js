@@ -39,3 +39,34 @@ const params = {
 };
 const proxy = 'https://corsproxy.io/?';
 const fullUrl = proxy + encodeURIComponent(`${wfsUrl}?${queryString}`);
+const fullUrl = `${wfsUrl}?${queryString}`;
+const proxiedUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(fullUrl)}`;
+
+fetch(proxiedUrl)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(data => {
+    L.geoJSON(data, {
+      style: feature => ({
+        color: '#FF5733',
+        weight: 2,
+        fillOpacity: 0.5
+      }),
+      onEachFeature: (feature, layer) => {
+        const props = feature.properties || {};
+        const popupContent =
+          `<b>Estación:</b> ${props.estacion || 'N/A'}<br>` +
+          `<b>Contaminante:</b> ${props.contaminante || 'N/A'}<br>` +
+          `<b>Valor:</b> ${props.valor || 'N/A'}`;
+        layer.bindPopup(popupContent);
+      }
+    }).addTo(map);
+  })
+  .catch(error => {
+    console.error('Error cargando capa WFS:', error);
+    alert('No se pudo cargar la capa de calidad del aire');
+  });

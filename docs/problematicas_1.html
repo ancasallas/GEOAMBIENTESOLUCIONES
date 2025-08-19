@@ -3,14 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GeoAmbientes Soluciones - Problemática de Calidad del Aire</title>
+  <title>GeoAmbientes Soluciones - Problemáticas</title>
   <link rel="stylesheet" href="est_problem.css" />
-  
-  <!-- Leaflet CSS sin integrity -->
-  <link 
-    rel="stylesheet" 
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
-  />
 </head>
 <body>
 
@@ -39,75 +33,38 @@
   </nav>
 
   <main>
-    <h2>MAPA DE CALIDAD DEL AIRE - BARRIO EL VERGEL ORIENTAL</h2>
-    <div id="map"></div>
+    <h2 class="titulo-principal">Problemáticas del Espacio Público</h2>
+
+    <section class="problema fila">
+      <div class="imagen">
+        <img src="PV_1.png" alt="Huecos en la vía" />
+      </div>
+      <div class="descripcion">
+        <h3>Huecos en la vía principal</h3>
+        <p>Esta problemática representa el mal estado de las calles del barrio, generando riesgo para vehículos y peatones, además de afectar la movilidad.</p>
+      </div>
+    </section>
+
+    <section class="problema fila inversa">
+      <div class="imagen">
+        <img src="PV_2.png" alt="Zona sin pavimentar" />
+      </div>
+      <div class="descripcion">
+        <h3>Zona sin pavimentar</h3>
+        <p>La falta de pavimentación en algunas calles representa una barrera para la accesibilidad, especialmente en época de lluvias.</p>
+      </div>
+    </section>
+
+    <section class="problema fila">
+      <div class="imagen">
+        <img src="ANDEN.png" alt="Andén roto" />
+      </div>
+      <div class="descripcion">
+        <h3>Andén roto y peligroso</h3>
+        <p>El mal estado de los andenes es un riesgo para los peatones, especialmente personas mayores o con discapacidad.</p>
+      </div>
+    </section>
   </main>
 
-  <!-- Leaflet JS sin integrity -->
-  <script 
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-  ></script>
-
-  <script>
-    // Centro en El Vergel Oriental, Bogotá
-    const centerLatLng = [4.6496, -74.1442];
-    const zoomLevel = 15;
-
-    // Inicializa mapa Leaflet
-    const map = L.map('map').setView(centerLatLng, zoomLevel);
-
-    // Agrega capa base OSM
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
-
-    // Capa WFS calidad del aire
-    const wfsUrl = 'http://iboca.ambientebogota.gov.co:8080/geoserver/sda_ca/wfs';
-
-    // Parámetros para petición WFS GetFeature en GeoJSON
-    const params = {
-      service: 'WFS',
-      version: '2.0.0',
-      request: 'GetFeature',
-      typeNames: 'sda_ca:Hist_ca_aire_estaciones',
-      outputFormat: 'application/json',
-      srsName: 'EPSG:4326',
-      cql_filter: 'INTERSECTS(geom, POLYGON((-74.15 4.645, -74.13 4.645, -74.13 4.655, -74.15 4.655, -74.15 4.645)))'
-    };
-
-    // Construir URL con query string
-    const queryString = new URLSearchParams(params).toString();
-    const fullUrl = `${wfsUrl}?${queryString}`;
-
-    // Cargar GeoJSON de la capa WFS
-    fetch(fullUrl)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        // Agregar GeoJSON al mapa con estilo
-        L.geoJSON(data, {
-          style: feature => ({
-            color: '#FF5733',
-            weight: 2,
-            fillOpacity: 0.5
-          }),
-          onEachFeature: (feature, layer) => {
-            const props = feature.properties || {};
-            let popupContent = '<b>Estación:</b> ' + (props.estacion || 'N/A') + '<br>' +
-                               '<b>Contaminante:</b> ' + (props.contaminante || 'N/A') + '<br>' +
-                               '<b>Valor:</b> ' + (props.valor || 'N/A');
-            layer.bindPopup(popupContent);
-          }
-        }).addTo(map);
-      })
-      .catch(error => {
-        console.error('Error cargando capa WFS:', error);
-        alert('No se pudo cargar la capa de calidad del aire');
-      });
-  </script>
 </body>
 </html>
