@@ -128,25 +128,17 @@ nav {
   font-size: 1.6rem;
 }
 
-/* “Rutas del SITP”: alineado a la izquierda */
-#subtitulo-Terciario {
-  text-align: left;
-  font-size: 15px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: #3a3a3a;
-  margin: 10px 0 8px 20px; /* margen izquierdo para alinear */
-}
 /* Estilos para el mapa */
 .contenedor {
     display: flex;
-    height: 80vh; /* Altura del área debajo del menú */
+    height: 90vh; /* Altura del área debajo del menú */
 }
 
 /* Mapa ocupa la mitad izquierda */
 #map {
     flex: 1; /* Ocupa el 50% */
+    border-top: 4px solid #1b5e20; /* línea verde encima del menú */
+    border-bottom: 4px solid #1b5e20;
 }
 
 /* Texto ocupa la mitad derecha */
@@ -158,8 +150,8 @@ nav {
     align-items: center;
     font-size: 1.8em;
     font-weight: bold;
+    border-bottom: 4px solid #1b5e20;
 }
-
 /* ===== Contacto ===== */
 footer.contacto {
   background: #1b4332;
@@ -176,8 +168,9 @@ footer.contacto h3 {
 
 footer.contacto p {
   margin: 5px 0;
-  font-size: 1.93rem;
+  font-size: 0.95rem;
 }
+
 .texto {
   flex: 1;
   background-color: #f5f5f5;
@@ -196,4 +189,26 @@ footer.contacto p {
 .texto p {
   line-height: 1.5;
   margin: 8px 0 0 0;
+}
+
+.img-panel {
+  display: block;
+  margin: 15px auto 0 auto; /* centrada y separada del texto */
+  max-width: 95%;           /* ocupa como máximo el 90% del ancho del panel */
+  border-radius: 8px;       /* esquinas redondeadas */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* sombreado suave */
+}
+
+.popup-img {
+  width: 80%;        /* ocupa todo el ancho del popup */
+  height: auto;       /* mantiene proporción */
+  border-radius: 10px;
+}
+
+.leaflet-popup-content {
+  margin: 5px;
+}
+
+.leaflet-popup-content-wrapper {
+  max-width: 280px;   /* controla el tamaño total del popup */
 }
