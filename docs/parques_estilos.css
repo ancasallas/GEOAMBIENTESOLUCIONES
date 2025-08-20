@@ -210,5 +210,5 @@ footer.contacto p {
 }
 
 .leaflet-popup-content-wrapper {
-  max-width: 280px;   /* controla el tamaño total del popup */
+  max-width: 300px;   /* controla el tamaño total del popup */
 }
