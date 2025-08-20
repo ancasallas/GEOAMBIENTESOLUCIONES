@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GeoAmbientes – Problemáticas (Kennedy 2023)</title>
+
+  <!-- Tus estilos -->
+  <link rel="stylesheet" href="est_problem.css" />
+  <link rel="stylesheet" href="est_vias.css" />
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Estilos locales mínimos (puedes moverlos a tu CSS si quieres) -->
+  <style>
+    .contenedor-graficas{max-width:1200px;margin:0 auto 56px;display:grid;gap:36px;padding:0 18px}
+    .card{background:#fff;border-radius:14px;box-shadow:0 8px 28px rgba(0,0,0,.08);padding:18px 18px 12px;border:1px solid rgba(0,0,0,.06)}
+    .card canvas{width:100% !important;height:520px !important;display:block}
+    .bloque-problematicas{max-width:1200px;margin:0 auto 56px;padding:0 18px;text-align:center}
+    .problema{display:flex;align-items:center;gap:22px;margin-bottom:34px;text-align:left}
+    .problema img{width:48%;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.15)}
+    .problema .texto{width:52%;text-align:justify;line-height:1.5}
+    .problema:nth-child(even){flex-direction:row-reverse}
+    .titulos-principales{max-width:1200px;margin:16px auto 10px;padding:0 18px;text-align:center}
+    .titulos-principales .icono{margin-right:.35rem}
+  </style>
+</head>
+<body>
+
+  <!-- ===== Encabezado ORIGINAL ===== -->
+  <header>
+    <img src="Logo GeoAmbientes.png" alt="GeoAmbientes Logo" />
+    <h1>GEOAMBIENTES SOLUCIONES</h1>
+  </header>
+
+  <!-- ===== Menú ORIGINAL ===== -->
+  <nav>
+    <ul class="menu">
+      <li class="menu-item"><a href="index.html">Inicio</a></li>
+      <li class="menu-item has-submenu">
+        <a href="#">Equipamientos</a>
+        <ul class="submenu">
+          <li><a href="ubicacion.html">Ubicación</a></li>
+          <li><a href="Movilidad.html">Movilidad</a></li>
+          <li><a href="parques.html">Parques</a></li>
+          <li><a href="Catastro3D.html">Catastro 3D</a></li>
+          <li><a href="tour_persona.html">Recorrido virtual</a></li>
+          <li><a href="vias.html">Vías</a></li>
+        </ul>
+      </li>
+      <li class="menu-item"><a href="problematicas_1.html">Problemáticas</a></li>
+      <li class="menu-item"><a href="#">Acerca de</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== Títulos (debajo del menú) ===== -->
+  <section class="titulos-principales">
+    <!-- Botón/etiqueta principal -->
+    <h2>
+      <span class="titulo-boton">
+        <span class="icono">⚠️</span> Problemáticas
+      </span>
+    </h2>
+
+    <!-- Subtítulos -->
+    <h3 class="titulo-secundario">
+      <span class="icono">🏠</span> Barrio El Vergel Oriental Kennedy Bogotá
+    </h3>
+    <h3 class="titulo-secundario">
+      <span class="icono">🌬️</span> Calidad del aire
+    </h3>
+  </section>
+
+  <!-- ===== Contenido ===== -->
+  <main>
+    <!-- Selector de mes -->
+    <div style="text-align:center; margin-bottom:20px;">
+      <label for="mesSelect"><b>Selecciona mes:</b></label>
+      <select id="mesSelect">
+        <option value="enero">Enero</option>
+        <option value="febrero">Febrero</option>
+        <option value="marzo">Marzo</option>
+        <option value="abril">Abril</option>
+        <option value="mayo">Mayo</option>
+        <option value="junio">Junio</option>
+        <option value="julio">Julio</option>
+        <option value="agosto">Agosto</option>
+        <option value="septiembre">Septiembre</option>
+      </select>
+    </div>
+
+    <!-- Gráficas (SIN cambiar su lógica) -->
+    <section class="contenedor-graficas">
+      <div class="card"><canvas id="graficaPM"></canvas></div>
+      <div class="card"><canvas id="graficaGases"></canvas></div>
+    </section>
+
+    <!-- Problemáticas con botón/etiqueta de sección -->
+    <section class="bloque-problematicas">
+      <h2>
+        <span class="titulo-boton">
+          <span class="icono">🏙️</span> Problemáticas de espacio público
+        </span>
+      </h2>
+
+      <div class="problema">
+        <img src="PV_1.png" alt="Vía con baches y deterioro del pavimento">
+        <div class="texto">
+          <p><strong>Vías en mal estado.</strong> Se observan baches que generan riesgo de accidentes y aumentan emisiones por frenadas y aceleraciones frecuentes.</p>
+        </div>
+      </div>
+
+      <div class="problema">
+        <img src="PV_2.png" alt="Muros y bordes con grafitis">
+        <div class="texto">
+          <p><strong>Fachadas y bordes deteriorados.</strong> La falta de mantenimiento y grafitis desincentivan el uso peatonal y reducen la seguridad del espacio público.</p>
+        </div>
+      </div>
+
+      <div class="problema">
+        <img src="ANDEN.png" alt="Andén deteriorado">
+        <div class="texto">
+          <p><strong>Andenes inseguros y obstrucciones.</strong> El pavimento irregular obliga a peatones y ciclistas a invadir la calzada, aumentando la vulnerabilidad.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Pie de página ORIGINAL ===== -->
+  <footer class="contacto">
+    <h3>GEOAMBIENTES SOLUCIONES</h3>
+    <p><strong>Dirección:</strong> Calle 45 # 20-15, Bogotá, Colombia</p>
+    <p><strong>Código postal:</strong> 111321</p>
+    <p><strong>Horarios:</strong> Lunes a viernes de 8:00 a.m. a 4:30 p.m.</p>
+    <p><strong>Teléfono:</strong> +57 (601) 456 78 90 Ext.101 y 102</p>
+    <p><strong>Línea gratuita:</strong> 01-8000-112233</p>
+    <p><strong>Email:</strong> servicio@geoambientes.com.co</p>
+    <p><strong>NIT:</strong> 901234567-8</p>
+  </footer>
+
+  <!-- ===== Script de gráficas (sin cambios) ===== -->
+  <script>
+    const ctxPM = document.getElementById("graficaPM").getContext("2d");
+    const ctxGases = document.getElementById("graficaGases").getContext("2d");
+
+    let chartPM, chartGases;
+    const estacionesKennedy = ["Carvajal - Sevillana", "Kennedy", "Tunal"];
+    const palette = ["#c0392b","#2980b9","#27ae60","#8e44ad","#e67e22","#16a085"];
+
+    async function cargarDatos(mes) {
+      const archivo = `${mes}2023.geojson`;
+      const resp = await fetch(archivo);
+      const data = await resp.json();
+      const features = data.features || [];
+
+      const registros = features
+        .map(f => f.properties || {})
+        .filter(p => estacionesKennedy.includes(p.estacion))
+        .map(p => ({ estacion: p.estacion, contaminante: p.contaminante, valor: Number(p.valor)||0 }));
+
+      graficar(registros, mes);
+    }
+
+    function promedio(arr){ return arr.length ? arr.reduce((a,b)=>a+b,0)/arr.length : 0 }
+
+    function agrupar(registros, filtro){
+      const estaciones = estacionesKennedy;
+      const contaminantes = filtro || [...new Set(registros.map(r=>r.contaminante))];
+      return {
+        labels: estaciones,
+        datasets: contaminantes.map((c,i)=>({
+          label:c,
+          data: estaciones.map(e=> promedio(registros.filter(r=>r.estacion===e && r.contaminante===c).map(r=>r.valor))),
+          borderColor: palette[i%palette.length],
+          backgroundColor: palette[i%palette.length],
+          borderWidth:3, tension:0.2, pointRadius:5, fill:false
+        }))
+      }
+    }
+
+    function graficar(registros, mes){
+      if(chartPM) chartPM.destroy();
+      if(chartGases) chartGases.destroy();
+
+      chartPM = new Chart(ctxPM,{
+        type:"line",
+        data: agrupar(registros,["PM10","PM2.5"]),
+        options:{ plugins:{ title:{ display:true, text:"PM10 / PM2.5 por estación — "+mes, font:{ size:22 }}}}
+      });
+
+      chartGases = new Chart(ctxGases,{
+        type:"line",
+        data: agrupar(registros,null),
+        options:{ plugins:{ title:{ display:true, text:"Otros gases por estación — "+mes, font:{ size:22 }}}}
+      });
+    }
+
+    document.getElementById("mesSelect").addEventListener("change",e=>cargarDatos(e.target.value));
+    cargarDatos("enero");
+  </script>
+</body>
+</html>
