@@ -43,66 +43,16 @@
 <div class="contenedor">
     <!-- Mapa -->
     <div id="map"></div>
-
-    <!-- Texto -->
-    <div class="texto">
-        <h2>Barrio El Vergel Oriental</h2>
-    </div>
+<!-- Texto -->
+<div class="texto" id="panel-humedal">
+  <div>
+    <h2>Barrio El Vergel Oriental</h2>
+    <p>Haz clic en el marcador del <strong>Humedal de Techo</strong> para ver la descripción aquí.</p>
+  </div>
 </div>
-    <!-- Librería Leaflet -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <!-- Librería jQuery para cargar archivo GeoJSON -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-    <script>
-        // Coordenadas Geográfica de Puente Aranda
-        const centro = [4.625381870446709, -74.11439689643427];
-
-        // Coordenadas Geográficas del Humedal de Techo
-        const HumedalTecho = [4.648192186796589, -74.1431178308849];
-
-        // Crear el mapa
-        const map = L.map('map').setView(centro, 13);
-
-        // Capa base (OpenStreetMap)
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(map);
-
-        // Marcador
-        L.marker(HumedalTecho)
-        .addTo(map)
-        .bindPopup('Humedal de Techo')
-        .openPopup();
-
-        // Estilo del polígono del humedal
-        var estiloPoligonoHumedal = {
-            fillColor: "#1B5E20",       // Verde para el relleno
-            color: "#0D3310",           // Verde más oscuro para el borde
-            weight: 1,                  // Grosor del borde
-            opacity: 1                  // Opacidad del borde
-        };
-
-        // Cargar el archivo GeoJSON del polígono del Humedal
-        $.getJSON('humedal.geojson', function(data) {
-            L.geoJSON(data, {
-                style: estiloPoligonoHumedal
-            }).addTo(map);
-        });
-        // Estilo del polígono del barrio
-        var estiloPoligonoBarrio = {
-            fillColor: "#09435C",       // Azul para el relleno
-            color: "#031821",           // Azul más oscuro para el borde
-            weight: 1,                  // Grosor del borde
-            opacity: 1                  // Opacidad del borde
-        };
-        // Cargar el archivo GeoJSON del polígono del Barrio
-        $.getJSON('BARRIO.geojson', function(data) {
-            L.geoJSON(data, {
-                style: estiloPoligonoBarrio
-            }).addTo(map);
-        });
-    </script>
+    <script src="parques.js" defer></script>
+   
 </body>
 </html>
