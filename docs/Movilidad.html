@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Movilidad y Rutas del SITP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Estilos de Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <!-- Tu hoja de estilos -->
+    <link rel="stylesheet" href="Movilidadestilos.css">
+</head>
+<body>
+
+    <header>
+        <img src="Logo GeoAmbientes.png" alt="Logo">
+        <h1>GeoAmbientes Soluciones</h1>
+       
+        <!-- ===== Menú ===== -->
+        <nav>
+            <ul class="menu">
+                <li class="menu-item"><a href="index.html">Inicio</a></li>
+                <li class="menu-item has-submenu">
+                    <a href="#">Equipamientos</a>
+                    <ul class="submenu">
+                        <li><a href="ubicacion.html">Ubicación</a></li>
+                        <li><a href="Movilidad.html">Movilidad</a></li>
+                        <li><a href="parques.html">Parques</a></li>
+                        <li><a href="Catastro3D.html">Catastro 3D</a></li>
+                        <li><a href="tour_persona.html">Recorrido virtual</a></li>
+                        <li><a href="vias.html">Vías</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="problematicas_1.html">Problemáticas</a></li>
+                <li class="menu-item"><a href="Acercade.html">Acerca de</a></li>
+            </ul>
+        </nav>
+
+        <!-- ===== Títulos reorganizados ===== -->
+        <h2 id="titulo-movilidad">
+            <span class="icono">🚦</span> Movilidad
+        </h2>
+
+        <h3 class="titulo-secundario">
+            <span class="icono">🏠</span> Barrio El Vergel Oriental Kennedy Bogotá
+        </h3>
+
+        <h3 class="titulo-secundario">
+            <span class="icono">🚌</span> Rutas del SITP
+        </h3>
+    </header>
+
+    <!-- ===== Mapa ===== -->
+    <div id="map"></div>
+
+    <!-- ===== Contacto ===== -->
+    <footer class="contacto">
+        <h3>GEOAMBIENTES SOLUCIONES</h3>
+        <p><strong>Dirección:</strong> Calle 45 # 20-15, Bogotá, Colombia</p>
+        <p><strong>Código postal:</strong> 111321</p>
+        <p><strong>Horarios de atención al ciudadano:</strong> Lunes a viernes de 8:00 a.m. a 4:30 p.m.</p>
+        <p><strong>Teléfono conmutador:</strong> +57 (601) 456 78 90 Ext.101 y 102</p>
+        <p><strong>Línea gratuita:</strong> 01-8000-112233</p>
+        <p><strong>Correo de contacto:</strong> servicio@geoambientes.com.co</p>
+        <p><strong>Radicación virtual:</strong> radicacion@geoambientes.com.co</p>
+        <p><strong>NIT:</strong> 901234567-8</p>
+    </footer>
+
+    <!-- Librería Leaflet -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Librería jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Tu archivo JS -->
+    <script src="MovilidadPrograma.js"></script>
+    
+    
+</body>
+</html>
+
+
