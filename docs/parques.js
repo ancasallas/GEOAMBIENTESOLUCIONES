@@ -20,15 +20,16 @@ const marcadorTecho = L.marker(HumedalTecho).addTo(map);
 const descripcionHumedal = `
   <h2>Humedal de Techo</h2>
   <p>
-    Ecosistema estratégico ubicado en la localidad de <strong>Kennedy</strong>, Bogotá.
-    Contribuye a la regulación hídrica y sirve como hábitat de aves migratorias y residentes.
+    El humedal Techo hace parte de la cuenca del Tintal. Junto con sus humedales vecinos: la Vaca y el Burro hacían parte del gran humedal y zona de inundación de la laguna del Tintal.
   </p>
   <ul>
     <li><strong>Altitud:</strong> ~2.600 m s. n. m.</li>
-    <li><strong>Funciones:</strong> Retención de aguas, biodiversidad, amortiguación de inundaciones.</li>
-    <li><strong>Presiones:</strong> Urbanización, vertimientos difusos, residuos.</li>
+    <li><strong>Funciones:</strong> Retención de aguas, refugio de biodiversidad, amortiguación de inundaciones.</li>
+    <li><strong>Presiones:</strong> Urbanización, vertimientos difusos, residuos sólidos.</li>
   </ul>
-  <p><em>Fuente:</em> Documentos ambientales locales.</p>
+  <p>El humedal de Techo se encuentra ubicado en los antiguos predios de la Hacienda Techo. Cuya parcelación se inicio en los años 30. En los años 90 el humedal de Techo conservaba en gran parte el cuerpo de agua, flora y fauna y la población de la UPZ46. A partir de este tiempo se hacían fogatas y practicaban la caza de curies que los asaban y comían.</p>
+  <p>La historia del humedal de Techo es todo un ejemplo del terrible proceso de urbanización ilegal que sufrió nuestra ciudad en los años 80s y 90s que destruyó y redujo el tamaño de la mayoría de los humedales capitalinos.</p>
+  <p><em>Fuente:</em> Humedales de Bogotá.</p>
 `;
 
 // Click -> actualizar panel de la derecha
