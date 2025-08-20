@@ -98,16 +98,37 @@ nav {
   display: block;
 }
 
-/* ===== Títulos de sección ===== */
-#subtitulo {
+/* ===== Botón Catastro 3D ===== */
+#titulo-Catastro3D {
+  display: inline-block;
+  padding: 14px 28px;
+  border: 3px solid #2e7d32;
+  border-radius: 10px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #2e7d32;
+  background: #f1f8f4;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+  margin: 20px auto 10px auto;
   text-align: center;
-  font-size: 20px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: #3a3a3a;
-  margin-top: 40px;   /* separación extra bajo el menú */
-  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;   /* espacio entre ícono y texto */
+  max-width: fit-content;
+}
+
+/* ===== Subtítulo Barrio ===== */
+.titulo-secundario {
+  text-align: center;      /* Centrar el texto */
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+  margin: 8px 0 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centra icono + texto */
+  gap: 8px;
 }
 
 /* ===== Visor Cesium ===== */

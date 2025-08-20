@@ -6,47 +6,49 @@ const map = L.map('map').setView(centro, 12);
 
 // Capa base (OpenStreetMap)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; OpenStreetMap contributors'
+  maxZoom: 19,
+  attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
 // Estilo de los polígonos (relleno gris con transparencia y borde gris más oscuro)
 var estiloPoligono = {
-    fillColor: "#D4D1C7",
-    fillOpacity: 0.8,
-    color: "#505050",
-    weight: 1,
-    opacity: 1
+  fillColor: "#D4D1C7",
+  fillOpacity: 0.8,
+  color: "#505050",
+  weight: 1,
+  opacity: 1
 };
 
-// Cargar el archivo GeoJSON de polígonos
+// Cargar el polígono del barrio
 $.getJSON('BARRIO.geojson', function(data) {
-    var geojsonLayer = L.geoJSON(data, {
-        style: estiloPoligono
-    }).addTo(map);
-
-    // Hacer un zoom en el polígono cargado
-    var bounds = geojsonLayer.getBounds();
-    map.fitBounds(bounds);
+  var geojsonLayer = L.geoJSON(data, { style: estiloPoligono }).addTo(map);
+  var bounds = geojsonLayer.getBounds();
+  if (bounds.isValid()) map.fitBounds(bounds);
 });
-// Cargar el archivo GeoJSON de puntos (marcadores) y añadir los popups
+
+// ---- RUTAS: puntos + ruta punteada ----
 $.getJSON('RUTAS.geojson', function(data) {
 
+  // 1) (Opcional) Marcadores con popups como ya tenías
   function filenameFromCenefa(cenefa) {
     if (!cenefa) return null;
     let name = String(cenefa).trim();
-    if (!/\.(png|jpg|jpeg|webp|gif)$/i.test(name)) name += '.png'; // por defecto .png
+    if (!/\.(png|jpg|jpeg|webp|gif)$/i.test(name)) name += '.png';
     return name;
   }
 
-  L.geoJSON(data, {
-    pointToLayer: (feature, latlng) => L.marker(latlng),
+  const puntos = [];  // aquí guardaremos los LatLng para la línea
 
+  L.geoJSON(data, {
+    pointToLayer: (feature, latlng) => {
+      // Guardar el punto para la línea
+      puntos.push(latlng);
+      return L.marker(latlng);
+    },
     onEachFeature: (feature, layer) => {
       const p = feature.properties || {};
       const file = filenameFromCenefa(p.cenefa);
 
-      // Contenedor del popup (HTMLElement → permite manejar onerror con JS)
       const cont = document.createElement('div');
       cont.style.maxWidth = '280px';
 
@@ -67,15 +69,12 @@ $.getJSON('RUTAS.geojson', function(data) {
         img.alt = p.cenefa || '';
         img.style.cssText = 'width:100%;height:auto;border-radius:6px;margin-top:6px;display:block';
 
-        // 1er intento: docs/<archivo>
         const src1 = `docs/${file}`;
-        // 2do intento: <archivo> (misma carpeta del HTML)
         const src2 = `${file}`;
 
         img.src = src1;
         img.onerror = function () {
           if (img.src.endsWith(src1)) {
-            // probar ruta alternativa
             img.src = src2;
           } else {
             const note = document.createElement('div');
@@ -85,12 +84,10 @@ $.getJSON('RUTAS.geojson', function(data) {
           }
         };
 
-        // (opcional) enlace para abrir la imagen en pestaña nueva
         const a = document.createElement('a');
-        a.href = src1;            // el href inicial será src1
+        a.href = src1;
         a.target = '_blank';
         a.rel = 'noopener';
-        // si cambió a src2, actualizamos el href también
         img.addEventListener('load', () => { a.href = img.src; });
         img.addEventListener('error', () => { a.href = img.src; });
 
@@ -106,6 +103,56 @@ $.getJSON('RUTAS.geojson', function(data) {
       layer.bindPopup(cont, { maxWidth: 320 });
     }
   }).addTo(map);
+
+  // 2) Si el GeoJSON trae un campo de orden, ordenar antes de dibujar la línea
+  //    Detectamos el nombre automáticamente: 'orden', 'seq' o 'sequence'
+  const ordenKey = (() => {
+    const f = (data.features || [])[0];
+    if (!f || !f.properties) return null;
+    const keys = Object.keys(f.properties).map(k => k.toLowerCase());
+    if (keys.includes('orden')) return 'orden';
+    if (keys.includes('seq')) return 'seq';
+    if (keys.includes('sequence')) return 'sequence';
+    return null;
+  })();
+
+  let puntosOrdenados = puntos.slice();
+
+  if (ordenKey) {
+    // Reconstruimos tomando lat/lng según el orden declarado en properties
+    // (Por simplicidad, volvemos a leer de features para respetar el orden real)
+    const ordenadas = (data.features || [])
+      .filter(f => f.geometry && f.geometry.type === 'Point')
+      .map(f => ({
+        latlng: L.latLng(f.geometry.coordinates[1], f.geometry.coordinates[0]),
+        orden: Number(f.properties[ordenKey])
+      }))
+      .filter(o => !Number.isNaN(o.orden))
+      .sort((a, b) => a.orden - b.orden)
+      .map(o => o.latlng);
+
+    if (ordenadas.length > 1) {
+      puntosOrdenados = ordenadas;
+    }
+  }
+
+  // 3) Dibujar la polilínea punteada que conecta los puntos
+  if (puntosOrdenados.length > 1) {
+    const ruta = L.polyline(puntosOrdenados, {
+      color: '#0077ff',
+      weight: 3,
+      opacity: 1,
+      dashArray: '6 6',     // ----- línea punteada -----
+      lineJoin: 'round'
+    }).addTo(map);
+
+    // Ajustar zoom a la ruta
+    const rb = ruta.getBounds();
+    if (rb.isValid()) map.fitBounds(rb, { padding: [20, 20] });
+  }
 });
+
+
+
 
 
