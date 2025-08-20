@@ -2,48 +2,44 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Ubicación</title>
+    <title>Parques y Humedales</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Estilos de Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="parques_estilos.css">
 </head>
 <body>
    <!-- Encabezado con logo y título -->
     <header>
         <img src="Logo GeoAmbientes.png" alt="Logo">
-        <h1>GeoAmbientales Soluciones LTDA</h1>
-    </header>
-    <!-- Menú Desplegable -->
-    <nav>
-        <ul class="menu">
-            <li class="menu-item">
-                <a href="#">Lugares</a>
-                <ul class="submenu">
-                    <li><a href="#">Lugar 1</a></li>
-                    <li><a href="#">Lugar 2</a></li>
-                    <li><a href="#">Lugar 3</a></li>
-                </ul>
-            </li>
-            <li class="menu-item">
-                <a href="#">Situaciones</a>
-                <ul class="submenu">
-                    <li><a href="#">Situación 1</a></li>
-                    <li><a href="#">Situación 2</a></li>
-                    <li><a href="#">Situación 3</a></li>
-                </ul>
-            </li>
-            <li class="menu-item">
-                <a href="#">Acerca de</a>
-                <ul class="submenu">
-                    <li><a href="#">Información 1</a></li>
-                    <li><a href="#">Información 2</a></li>
-                    <li><a href="#">Información 3</a></li>
-                </ul>
-            </li>
+        <h1>GeoAmbientes Soluciones</h1>
+       
+      <!-- ===== Menú ===== -->
+  <nav>
+    <ul class="menu">
+      <li class="menu-item"><a href="index.html">Inicio</a></li>
+      <li class="menu-item has-submenu">
+        <a href="#">Equipamientos</a>
+        <ul class="submenu">
+          <li><a href="ubicacion.html">Ubicación</a></li>
+          <li><a href="Movilidad.html">Movilidad</a></li>
+          <li><a href="parques.html">Parques</a></li>
+          <li><a href="Catastro3D.html">Catastro 3D</a></li>
+          <li><a href="tour_persona.html">Recorrido virtual</a></li>
+          <li><a href="vias.html">Vías</a></li>
         </ul>
-    </nav>
-    <!-- Contenedor dividido -->
+      </li>
+      <li class="menu-item"><a href="problematicas_1.html">Problemáticas</a></li>
+      <li class="menu-item"><a href="Acercade.html">Acerca de</a></li>
+    </ul>
+  </nav>
+   <h2 class="subtitulo-secundario">
+      <span class="icono">🏠</span> Barrio El Vergel Oriental Kennedy Bogotá
+    </h2>
+    <h2 id="subtitulo">Parques y Humedales</h2>
+    <h4 id="subtitulo-Terciario">Humedal de Techo</h4>
+  </header>
+  <!-- Contenedor dividido -->
 <div class="contenedor">
     <!-- Mapa -->
     <div id="map"></div>
@@ -59,14 +55,14 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
     <script>
-        // Coordenadas Geográfica del Centro de Bogotá D.C.
-        const centro = [4.649624661655439, -74.10649527449779];
+        // Coordenadas Geográfica de Puente Aranda
+        const centro = [4.625381870446709, -74.11439689643427];
 
-        // Coordenadas Geográfica del Barrio El Vergel Oriental
-        const ElVergelOriental = [4.648719785059329, -74.14351049374825];
+        // Coordenadas Geográficas del Humedal de Techo
+        const HumedalTecho = [4.648192186796589, -74.1431178308849];
 
         // Crear el mapa
-        const map = L.map('map').setView(centro, 12);
+        const map = L.map('map').setView(centro, 13);
 
         // Capa base (OpenStreetMap)
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -75,11 +71,25 @@
         }).addTo(map);
 
         // Marcador
-        L.marker(ElVergelOriental)
+        L.marker(HumedalTecho)
         .addTo(map)
-        .bindPopup('El Vergel Oriental')
+        .bindPopup('Humedal de Techo')
         .openPopup();
 
+        // Estilo del polígono del humedal
+        var estiloPoligonoHumedal = {
+            fillColor: "#1B5E20",       // Verde para el relleno
+            color: "#0D3310",           // Verde más oscuro para el borde
+            weight: 1,                  // Grosor del borde
+            opacity: 1                  // Opacidad del borde
+        };
+
+        // Cargar el archivo GeoJSON del polígono del Humedal
+        $.getJSON('humedal.geojson', function(data) {
+            L.geoJSON(data, {
+                style: estiloPoligonoHumedal
+            }).addTo(map);
+        });
         // Estilo del polígono del barrio
         var estiloPoligonoBarrio = {
             fillColor: "#09435C",       // Azul para el relleno
@@ -91,21 +101,6 @@
         $.getJSON('BARRIO.geojson', function(data) {
             L.geoJSON(data, {
                 style: estiloPoligonoBarrio
-            }).addTo(map);
-        });
-
-        // Estilo de los polígonos (relleno gris con transparencia y borde gris más oscuro)
-        var estiloPoligono = {
-            fillColor: "#D4D1C7",       // Gris claro para el relleno
-            fillOpacity: 0.35,           // Transparencia del 35%
-            color: "#505050",           // Gris más oscuro para el borde
-            weight: 1,                  // Grosor del borde
-            opacity: 1                  // Opacidad del borde
-        };
-        // Cargar el archivo GeoJSON
-        $.getJSON('poligonos-localidades (1).geojson', function(data) {
-            L.geoJSON(data, {
-                style: estiloPoligono
             }).addTo(map);
         });
     </script>
