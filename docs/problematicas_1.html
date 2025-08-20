@@ -2,42 +2,77 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GeoAmbientes Soluciones - Problemáticas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gráficas Calidad del Aire – Kennedy 2023</title>
 
-  <!-- Archivos de estilos -->
+  <!-- Tus estilos -->
   <link rel="stylesheet" href="est_problem.css" />
   <link rel="stylesheet" href="est_vias.css" />
 
-  <!-- Leaflet -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-  <!-- Gráficas -->
+  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.3.1/dist/chartjs-adapter-luxon.umd.min.js"></script>
 
   <style>
-    /* Estilo del control dentro del mapa */
-    .distancia-control {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 8px 15px;
-      border-radius: 6px;
-      font-size: 14px;
-      font-weight: bold;
-      color: #2c3e50;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    .contenedor-graficas { 
+      max-width: 1200px; 
+      margin: 0 auto 56px; 
+      display: grid; 
+      gap: 36px; 
+      padding: 0 18px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 8px 28px rgba(0,0,0,.08);
+      padding: 18px 18px 12px;
+      border: 1px solid rgba(0,0,0,.06);
+    }
+    .card canvas {
+      width: 100% !important;
+      height: 520px !important;
+      display: block;
+    }
+    .bloque-problematicas { 
+      max-width: 1200px; 
+      margin: 0 auto 56px; 
+      padding: 0 18px; 
+    }
+    .bloque-problematicas h2 {
+      text-align: center; 
+      margin: 8px 0 24px; 
+      text-transform: uppercase; 
+      letter-spacing: .5px;
+    }
+    .problema {
+      display: flex; 
+      align-items: center; 
+      gap: 22px; 
+      margin-bottom: 34px;
+    }
+    .problema img {
+      width: 48%;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.15);
+    }
+    .problema .texto {
+      width: 52%;
+      text-align: justify;
+      line-height: 1.5;
+    }
+    .problema:nth-child(even) { 
+      flex-direction: row-reverse; 
     }
   </style>
 </head>
 <body>
 
+  <!-- ===== Encabezado ORIGINAL ===== -->
   <header>
     <img src="Logo GeoAmbientes.png" alt="GeoAmbientes Logo" />
-    <h1>GeoAmbientes Soluciones</h1>
+    <h1>GEOAMBIENTES SOLUCIONES</h1>
   </header>
 
+  <!-- ===== Menú ORIGINAL ===== -->
   <nav>
     <ul class="menu">
       <li class="menu-item"><a href="index.html">Inicio</a></li>
@@ -57,103 +92,120 @@
     </ul>
   </nav>
 
+  <!-- ===== Contenido ===== -->
   <main>
+    <h2 class="titulo-principal">GRÁFICAS CALIDAD DEL AIRE – LOCALIDAD KENNEDY (2023)</h2>
 
-    <h2 class="titulo-principal">Mapa ubicación estación de monitoreo del aire más cerca al barrio El Vergel</h2>
-    <div id="map" data-zoom="16" data-center="4.628,-74.158"></div>
+    <!-- Selector -->
+    <div style="text-align:center; margin-bottom:20px;">
+      <label for="mesSelect"><b>Selecciona mes:</b></label>
+      <select id="mesSelect">
+        <option value="enero">Enero</option>
+        <option value="febrero">Febrero</option>
+        <option value="marzo">Marzo</option>
+        <option value="abril">Abril</option>
+        <option value="mayo">Mayo</option>
+        <option value="junio">Junio</option>
+        <option value="julio">Julio</option>
+        <option value="agosto">Agosto</option>
+        <option value="septiembre">Septiembre</option>
+      </select>
+    </div>
 
+    <!-- Gráficas -->
+    <section class="contenedor-graficas">
+      <div class="card"><canvas id="graficaPM"></canvas></div>
+      <div class="card"><canvas id="graficaGases"></canvas></div>
+    </section>
+
+    <!-- Problemáticas -->
+    <section class="bloque-problematicas">
+      <h2>Problemáticas de espacio público</h2>
+
+      <div class="problema">
+        <img src="PV_1.png" alt="Vía con baches y deterioro del pavimento">
+        <div class="texto">
+          <p><strong>Vías en mal estado.</strong> Se observan baches que generan riesgo de accidentes y aumentan emisiones por frenadas y aceleraciones frecuentes.</p>
+        </div>
+      </div>
+
+      <div class="problema">
+        <img src="PV_2.png" alt="Muros y bordes con grafitis">
+        <div class="texto">
+          <p><strong>Fachadas y bordes deteriorados.</strong> La falta de mantenimiento y grafitis desincentivan el uso peatonal y reducen la seguridad del espacio público.</p>
+        </div>
+      </div>
+
+      <div class="problema">
+        <img src="ANDEN.png" alt="Andén deteriorado">
+        <div class="texto">
+          <p><strong>Andenes inseguros y obstrucciones.</strong> El pavimento irregular obliga a peatones y ciclistas a invadir la calzada, aumentando la vulnerabilidad.</p>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <script>
-    const mapEl = document.getElementById('map');
-    const ZOOM_KENNEDY = parseInt(mapEl.dataset.zoom || '13', 10);
-    const CENTRO_KENNEDY = (mapEl.dataset.center || '4.628,-74.158').split(',').map(Number);
-
-    const map = L.map('map').setView(CENTRO_KENNEDY, ZOOM_KENNEDY);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap'
-    }).addTo(map);
-
-    // Punto de referencia en El Vergel
-    const puntoVergel = [4.646432890459664, -74.14431585587414];
-    L.marker(puntoVergel).addTo(map).bindPopup("Punto de referencia (Vergel)");
-
-    fetch("kennedy_estaciones.geojson")
-      .then(r => r.json())
-      .then(data => {
-        const features = data.features || [];
-        const capa = L.geoJSON(data, {
-          pointToLayer: (feature, latlng) =>
-            L.circleMarker(latlng, {
-              radius: 6,
-              fillColor: "#e74c3c",
-              color: "#000",
-              weight: 1,
-              opacity: 1,
-              fillOpacity: 0.85
-            }),
-          onEachFeature: (feature, layer) => {
-            const p = feature.properties || {};
-            layer.bindPopup(
-              `<b>Estación:</b> ${p.estacion ?? "N/A"}<br>` +
-              `<b>Contaminante:</b> ${p.contaminante ?? "N/A"}<br>` +
-              `<b>Valor:</b> ${p.valor ?? "N/A"}<br>` +
-              `<b>Fecha:</b> ${p.fecha_hora ?? "N/A"}`
-            );
-          }
-        }).addTo(map);
-
-        // Buscar la estación más cercana al punto Vergel
-        let estacionCercana = null;
-        let distanciaMin = Infinity;
-        features.forEach(f => {
-          const coords = f.geometry.coordinates; // [lng, lat]
-          const estacionLatLng = [coords[1], coords[0]];
-          const dist = map.distance(estacionLatLng, puntoVergel);
-          if (dist < distanciaMin) {
-            distanciaMin = dist;
-            estacionCercana = estacionLatLng;
-          }
-        });
-
-        if (estacionCercana) {
-          const linea = L.polyline([estacionCercana, puntoVergel], {
-            color: "blue",
-            weight: 3,
-            dashArray: "6,6"
-          }).addTo(map);
-
-          // Calcular distancia
-          const distancia = distanciaMin.toFixed(0);
-
-          // Control personalizado para mostrar la distancia en el mapa
-          const DistanciaControl = L.control({ position: "bottomleft" });
-          DistanciaControl.onAdd = function () {
-            const div = L.DomUtil.create("div", "distancia-control");
-            div.innerHTML = `📏 Distancia entre el Vergel y la estación más cercana: <b>${distancia} m</b>`;
-            return div;
-          };
-          DistanciaControl.addTo(map);
-
-          // Ajustar el zoom para mostrar ambos puntos
-          const bounds = L.latLngBounds([estacionCercana, puntoVergel]);
-          map.fitBounds(bounds, { padding: [40, 40] });
-        }
-      })
-      .catch(err => console.error("Error cargando GeoJSON:", err));
-  </script>
-
+  <!-- ===== Pie de página ORIGINAL ===== -->
   <footer class="contacto">
     <h3>GEOAMBIENTES SOLUCIONES</h3>
     <p><strong>Dirección:</strong> Calle 45 # 20-15, Bogotá, Colombia</p>
     <p><strong>Código postal:</strong> 111321</p>
-    <p><strong>Horarios de atención al ciudadano:</strong> Lunes a viernes de 8:00 a.m. a 4:30 p.m.</p>
-    <p><strong>Teléfono conmutador:</strong> +57 (601) 456 78 90 Ext.101 y 102</p>
+    <p><strong>Horarios:</strong> Lunes a viernes de 8:00 a.m. a 4:30 p.m.</p>
+    <p><strong>Teléfono:</strong> +57 (601) 456 78 90 Ext.101 y 102</p>
     <p><strong>Línea gratuita:</strong> 01-8000-112233</p>
-    <p><strong>Correo de contacto:</strong> servicio@geoambientes.com.co</p>
-    <p><strong>Radicación virtual:</strong> radicacion@geoambientes.com.co</p>
+    <p><strong>Email:</strong> servicio@geoambientes.com.co</p>
     <p><strong>NIT:</strong> 901234567-8</p>
   </footer>
+
+  <!-- ===== Script ===== -->
+  <script>
+    const ctxPM = document.getElementById("graficaPM").getContext("2d");
+    const ctxGases = document.getElementById("graficaGases").getContext("2d");
+
+    let chartPM, chartGases;
+    const estacionesKennedy = ["Carvajal - Sevillana", "Kennedy", "Tunal"];
+    const palette = ["#c0392b","#2980b9","#27ae60","#8e44ad","#e67e22","#16a085"];
+
+    async function cargarDatos(mes) {
+      const archivo = `${mes}2023.geojson`;
+      const resp = await fetch(archivo);
+      const data = await resp.json();
+      const features = data.features || [];
+
+      const registros = features
+        .map(f => f.properties || {})
+        .filter(p => estacionesKennedy.includes(p.estacion))
+        .map(p => ({ estacion: p.estacion, contaminante: p.contaminante, valor: Number(p.valor)||0 }));
+
+      graficar(registros, mes);
+    }
+
+    function promedio(arr){ return arr.length ? arr.reduce((a,b)=>a+b,0)/arr.length : 0 }
+
+    function agrupar(registros, filtro){
+      const estaciones = estacionesKennedy;
+      const contaminantes = filtro || [...new Set(registros.map(r=>r.contaminante))];
+      return {
+        labels: estaciones,
+        datasets: contaminantes.map((c,i)=>({
+          label:c,
+          data: estaciones.map(e=> promedio(registros.filter(r=>r.estacion===e && r.contaminante===c).map(r=>r.valor))),
+          borderColor: palette[i%palette.length],
+          backgroundColor: palette[i%palette.length],
+          borderWidth:3, tension:0.2, pointRadius:5, fill:false
+        }))
+      }
+    }
+
+    function graficar(registros, mes){
+      if(chartPM) chartPM.destroy();
+      if(chartGases) chartGases.destroy();
+      chartPM = new Chart(ctxPM,{type:"line",data:agrupar(registros,["PM10","PM2.5"]),options:{plugins:{title:{display:true,text:"PM10 / PM2.5 por estación — "+mes,font:{size:22}}}}});
+      chartGases = new Chart(ctxGases,{type:"line",data:agrupar(registros,null),options:{plugins:{title:{display:true,text:"Otros gases por estación — "+mes,font:{size:22}}}}});
+    }
+
+    document.getElementById("mesSelect").addEventListener("change",e=>cargarDatos(e.target.value));
+    cargarDatos("enero");
+  </script>
 </body>
 </html>
