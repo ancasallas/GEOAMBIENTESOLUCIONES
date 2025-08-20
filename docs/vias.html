@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vías Barrio El Vergel</title>
+
+    <!-- Estilos externos -->
+    <link rel="stylesheet" href="est_vias.css" />
+
+    <!-- Leaflet CSS -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+</head>
+<body>
+    <!-- Encabezado con logo y título -->
+    <header>
+        <img src="Logo GeoAmbientes.png" alt="Logo" />
+        <h1>GeoAmbientes Soluciones </h1>
+    </header>
+
+    <!-- Menú Desplegable -->
+    <nav>
+        <ul class="menu">
+          <li class="menu-item"><a href="index.html">Inicio</a></li>
+          <li class="menu-item has-submenu">
+            <a href="#">Equipamientos</a>
+            <ul class="submenu">
+              <li><a href="ubicacion.html">Ubicación</a></li>
+              <li><a href="Movilidad.html">Movilidad</a></li>
+              <li><a href="parques.html">Parques</a></li>
+              <li><a href="Catastro3D.html">Catastro 3D</a></li>
+              <li><a href="tour_persona.html">Recorrido virtual</a></li>
+              <li><a href="vias.html">Vías</a></li>
+            </ul>
+          </li>
+          <li class="menu-item"><a href="problematicas_1.html">Problemáticas</a></li>
+          <li class="menu-item"><a href="#">Acerca de</a></li>
+        </ul>
+    </nav>
+
+    <!-- ===== Contenedor principal ===== -->
+    <div class="contenedor-vias">
+      <!-- ===== Botón destacado Vías ===== -->
+      <h2 id="titulo-vias">
+        🚧 Vías
+      </h2>
+
+      <!-- ===== Subtítulo Barrio ===== -->
+      <h3 class="titulo-secundario">
+        🏠 BARRIO EL VERGEL ORIENTAL KENNEDY BOGOTÁ
+      </h3>
+    </div>
+
+    <!-- Contenedor del mapa -->
+    <div id="map"></div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Script para cargar el GeoJSON -->
+    <script>
+        // Coordenadas para centrar el mapa
+        const lat = 4.646432890459664;
+        const lng = -74.14431585587414;
+        const zoomLevel = 16.3;
+
+        // Inicialización del mapa
+        const map = L.map('map').setView([lat, lng], zoomLevel);
+
+        // Capa base OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors',
+        }).addTo(map);
+
+        // Polígono del barrio
+        fetch('BARRIO.geojson')
+          .then(resp => resp.json())
+          .then(geojson => {
+            const barrioLayer = L.geoJSON(geojson, {
+              style: {
+                color: '#1f78b4',
+                weight: 2,
+                fillColor: '#1f78b4',
+                fillOpacity: 0.15
+              },
+              onEachFeature: function (feature, layer) {
+                const nombre = (feature.properties && (feature.properties.nombre || feature.properties.name || feature.properties.NOMBRE)) || 'Barrio El Vergel';
+                layer.bindPopup(`<strong>${nombre}</strong>`);
+              }
+            }).addTo(map);
+
+            barrioLayer.bringToBack();
+
+            try {
+              const bounds = barrioLayer.getBounds();
+              if (bounds.isValid()) {
+                map.fitBounds(bounds, { padding: [20, 20] });
+              }
+            } catch (e) {
+              console.warn('No se pudieron calcular los límites del polígono:', e);
+            }
+          })
+          .catch(err => console.error('Error al cargar BARRIO.geojson:', err));
+
+        // Vías del barrio
+        fetch('Vias_Vergel.geojson')
+            .then((response) => response.json())
+            .then((data) => {
+                L.geoJSON(data, {
+                    style: {
+                        color: '#FF5733',
+                        weight: 3,
+                    },
+                }).addTo(map);
+            })
+            .catch((error) => {
+                console.error('Error al cargar el GeoJSON de Vías:', error);
+            });
+    </script>
+
+    <!-- Footer -->
+    <footer class="contacto">
+      <h3>GEOAMBIENTES SOLUCIONES</h3>
+      <p><strong>Dirección:</strong> Calle 45 # 20-15, Bogotá, Colombia</p>
+      <p><strong>Código postal:</strong> 111321</p>
+      <p><strong>Horarios de atención:</strong> Lunes a viernes de 8:00 a.m. a 4:30 p.m.</p>
+      <p><strong>Teléfono:</strong> +57 (601) 456 78 90 Ext.101 y 102</p>
+      <p><strong>Línea gratuita:</strong> 01-8000-112233</p>
+      <p><strong>Correo:</strong> servicio@geoambientes.com.co</p>
+      <p><strong>Radicación:</strong> radicacion@geoambientes.com.co</p>
+      <p><strong>NIT:</strong> 901234567-8</p>
+    </footer>
+</body>
+</html>
+

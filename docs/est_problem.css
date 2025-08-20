@@ -1,0 +1,299 @@
+/* ===== Base ===== */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #F6F2EF;
+}
+
+/* ===== Encabezado ===== */
+header {
+  background-color: #F6F2EF;
+  color: green;
+  padding: 15px 0;
+  text-align: center;
+}
+header img {
+  width: 150px;
+  vertical-align: middle;
+  margin-right: 15px;
+}
+header h1 {
+  display: inline;
+  vertical-align: middle;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+/* ===== Barra de navegación ===== */
+nav {
+  background-color: #e9e6e1;
+  border-bottom: 4px solid #1b5e20;
+  position: relative;
+  z-index: 2000;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+.menu-item {
+  position: relative;
+  border-right: 1px solid #d3d0cb;
+}
+.menu-item:last-child {
+  border-right: none;
+}
+.menu-item > a {
+  display: block;
+  padding: 18px 28px;
+  color: #3a3a3a;
+  font-size: 15px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  background-color: #e9e6e1;
+  transition: background-color 0.3s ease;
+}
+.menu-item:hover > a {
+  background-color: #dcd9d3;
+}
+
+/* ===== Submenú ===== */
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  margin: 0;
+  padding: 6px 0;
+  list-style: none;
+  background-color: #fdfaf6;
+  border: 1px solid #ccc;
+  box-shadow: 0 8px 16px rgba(0,0,0,.15);
+  border-radius: 4px;
+}
+.submenu li a {
+  display: block;
+  padding: 12px 16px;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+}
+.submenu li a:hover {
+  background-color: #f3f0eb;
+}
+.menu-item:hover .submenu {
+  display: block;
+}
+
+/* ===== Títulos ===== */
+h1, h2, h3, .titulo-principal {
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 1px;
+  margin: 20px 0;
+}
+
+/* ===== Selector de mes ===== */
+.selector-mes, 
+#mesSelect {
+  text-align: center;
+  margin: 20px auto;
+  font-size: 15px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* ===== Gráficas ===== */
+.contenedor-graficas {
+  max-width: 1200px;
+  margin: 0 auto 50px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+.contenedor-graficas .card {
+  width: 90%;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+  padding: 20px;
+  border: 1px solid #e0ddd8;
+}
+.contenedor-graficas canvas {
+  width: 100% !important;
+  height: 520px !important; /* más grande */
+  display: block;
+}
+
+/* ===== Bloque problemáticas ===== */
+.bloque-problematicas {
+  max-width: 1200px;
+  margin: 0 auto 50px;
+  padding: 0 18px;
+}
+.bloque-problematicas h2 {
+  text-align: center;
+  margin: 8px 0 24px;
+}
+.problema {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-bottom: 34px;
+}
+.problema img {
+  width: 48%;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.15);
+}
+.problema .texto {
+  width: 52%;
+  text-align: justify;
+  line-height: 1.5;
+}
+.problema:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+/* ===== Pie de página ===== */
+footer.contacto {
+  background: #1b4332;
+  color: white;
+  padding: 25px 20px;
+  margin-top: 30px;
+  text-align: center;
+}
+footer.contacto h3 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+footer.contacto p {
+  margin: 5px 0;
+  font-size: 0.95rem;
+}
+
+/* ===== Responsivo ===== */
+@media (max-width: 768px) {
+  .contenedor-graficas .card {
+    width: 100%;
+  }
+  .problema {
+    flex-direction: column;
+  }
+  .problema img, .problema .texto {
+    width: 100%;
+  }
+  /* ===== Botón Catastro 3D ===== */
+#titulo-Catastro3D {
+  display: inline-block;
+  padding: 14px 28px;x
+  border: 3px solid #2e7d32;
+  border-radius: 10px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #2e7d32;
+  background: #f1f8f4;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+  margin: 20px auto 10px auto;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;   /* espacio entre ícono y texto */
+  max-width: fit-content;
+}
+
+/* ===== Subtítulo Barrio ===== */
+.titulo-secundario {
+  text-align: center;      /* Centrar el texto */
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+  margin: 8px 0 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centra icono + texto */
+  gap: 8px;
+}
+
+}
+/* ===== Botón/etiqueta para títulos ===== */
+.titulos-principales { text-align: center; margin: 16px auto 10px; }
+
+.titulo-boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;              /* forma de pastilla */
+  background: #1b5e20;               /* verde institucional */
+  color: #ffffff;
+  font-weight: 800;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  border: 2px solid #145017;
+  box-shadow: 0 6px 16px rgba(0,0,0,.12);
+  user-select: none;
+}
+.titulo-boton .icono { margin-right: 6px; }
+.titulo-boton:hover { filter: brightness(.96); transform: translateY(-1px); }
+.titulo-boton:active { transform: translateY(0); }
+
+/* Variante clara (si alguna vez la necesitas) */
+.titulo-boton--claro {
+  background: #F6F2EF;
+  color: #1b5e20;
+  border: 2px solid #1b5e20;
+}
+
+/* Subtítulos debajo del botón */
+.titulo-secundario {
+  margin: 10px 0 4px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+
+/* Encabezado de la sección Problemáticas */
+.bloque-problematicas h2 .titulo-boton {
+  margin: 0 auto 8px;
+}
+/* ===== Botón estilo claro (similar a Parques y Humedales) ===== */
+.titulo-boton-claro {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  background: #ffffff;              /* fondo blanco */
+  color: #1b5e20;                   /* verde oscuro */
+  font-weight: 700;
+  border: 2px solid #1b5e20;        /* borde verde */
+  box-shadow: 0 3px 6px rgba(0,0,0,.1);
+}
+.titulo-boton-claro .icono { margin-right: 6px; }
+.titulo-boton-verde {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: #f9fff9;   /* Fondo interno claro */
+  color: #1b5e20;
+  font-weight: 700;
+  border: 2px solid #1b5e20;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.titulo-boton-verde .icono {
+  margin-right: 6px;
+}
+
