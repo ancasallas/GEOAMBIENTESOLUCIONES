@@ -18,7 +18,7 @@ const marcadorTecho = L.marker(HumedalTecho).addTo(map);
 
 // Popup con imagen (sin título)
 marcadorTecho.bindPopup(`
-  <img src="Humedal_3.jpg" alt="Humedal de Techo" style="width:280px; border-radius:8px;">
+  <img src="Humedal_4.jpg" alt="Humedal de Techo" style="width:280px; border-radius:8px;">
 `);
 
 // Descripción HTML a mostrar en el panel
