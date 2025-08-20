@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gráficas Calidad del Aire – Kennedy 2023</title>
+  <title>GeoAmbientes – Problemáticas (Kennedy 2023)</title>
 
   <!-- Tus estilos -->
   <link rel="stylesheet" href="est_problem.css" />
@@ -12,56 +12,18 @@
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+  <!-- Estilos locales mínimos (puedes moverlos a tu CSS si quieres) -->
   <style>
-    .contenedor-graficas { 
-      max-width: 1200px; 
-      margin: 0 auto 56px; 
-      display: grid; 
-      gap: 36px; 
-      padding: 0 18px;
-    }
-    .card {
-      background: #fff;
-      border-radius: 14px;
-      box-shadow: 0 8px 28px rgba(0,0,0,.08);
-      padding: 18px 18px 12px;
-      border: 1px solid rgba(0,0,0,.06);
-    }
-    .card canvas {
-      width: 100% !important;
-      height: 520px !important;
-      display: block;
-    }
-    .bloque-problematicas { 
-      max-width: 1200px; 
-      margin: 0 auto 56px; 
-      padding: 0 18px; 
-    }
-    .bloque-problematicas h2 {
-      text-align: center; 
-      margin: 8px 0 24px; 
-      text-transform: uppercase; 
-      letter-spacing: .5px;
-    }
-    .problema {
-      display: flex; 
-      align-items: center; 
-      gap: 22px; 
-      margin-bottom: 34px;
-    }
-    .problema img {
-      width: 48%;
-      border-radius: 10px;
-      box-shadow: 0 8px 24px rgba(0,0,0,.15);
-    }
-    .problema .texto {
-      width: 52%;
-      text-align: justify;
-      line-height: 1.5;
-    }
-    .problema:nth-child(even) { 
-      flex-direction: row-reverse; 
-    }
+    .contenedor-graficas{max-width:1200px;margin:0 auto 56px;display:grid;gap:36px;padding:0 18px}
+    .card{background:#fff;border-radius:14px;box-shadow:0 8px 28px rgba(0,0,0,.08);padding:18px 18px 12px;border:1px solid rgba(0,0,0,.06)}
+    .card canvas{width:100% !important;height:520px !important;display:block}
+    .bloque-problematicas{max-width:1200px;margin:0 auto 56px;padding:0 18px;text-align:center}
+    .problema{display:flex;align-items:center;gap:22px;margin-bottom:34px;text-align:left}
+    .problema img{width:48%;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.15)}
+    .problema .texto{width:52%;text-align:justify;line-height:1.5}
+    .problema:nth-child(even){flex-direction:row-reverse}
+    .titulos-principales{max-width:1200px;margin:16px auto 10px;padding:0 18px;text-align:center}
+    .titulos-principales .icono{margin-right:.35rem}
   </style>
 </head>
 <body>
@@ -79,24 +41,40 @@
       <li class="menu-item has-submenu">
         <a href="#">Equipamientos</a>
         <ul class="submenu">
-          <li><a href="#">Ubicación</a></li>
+          <li><a href="ubicacion.html">Ubicación</a></li>
           <li><a href="Movilidad.html">Movilidad</a></li>
-          <li><a href="#">Parques</a></li>
+          <li><a href="parques.html">Parques</a></li>
           <li><a href="Catastro3D.html">Catastro 3D</a></li>
           <li><a href="tour_persona.html">Recorrido virtual</a></li>
           <li><a href="vias.html">Vías</a></li>
         </ul>
       </li>
-      <li class="menu-item"><a href="#">Problemáticas</a></li>
+      <li class="menu-item"><a href="problematicas_1.html">Problemáticas</a></li>
       <li class="menu-item"><a href="#">Acerca de</a></li>
     </ul>
   </nav>
 
+  <!-- ===== Títulos (debajo del menú) ===== -->
+  <section class="titulos-principales">
+    <!-- Botón/etiqueta principal -->
+    <h2>
+      <span class="titulo-boton">
+        <span class="icono">⚠️</span> Problemáticas
+      </span>
+    </h2>
+
+    <!-- Subtítulos -->
+    <h3 class="titulo-secundario">
+      <span class="icono">🏠</span> Barrio El Vergel Oriental Kennedy Bogotá
+    </h3>
+    <h3 class="titulo-secundario">
+      <span class="icono">🌬️</span> Calidad del aire
+    </h3>
+  </section>
+
   <!-- ===== Contenido ===== -->
   <main>
-    <h2 class="titulo-principal">GRÁFICAS CALIDAD DEL AIRE – LOCALIDAD KENNEDY (2023)</h2>
-
-    <!-- Selector -->
+    <!-- Selector de mes -->
     <div style="text-align:center; margin-bottom:20px;">
       <label for="mesSelect"><b>Selecciona mes:</b></label>
       <select id="mesSelect">
@@ -112,15 +90,19 @@
       </select>
     </div>
 
-    <!-- Gráficas -->
+    <!-- Gráficas (SIN cambiar su lógica) -->
     <section class="contenedor-graficas">
       <div class="card"><canvas id="graficaPM"></canvas></div>
       <div class="card"><canvas id="graficaGases"></canvas></div>
     </section>
 
-    <!-- Problemáticas -->
+    <!-- Problemáticas con botón/etiqueta de sección -->
     <section class="bloque-problematicas">
-      <h2>Problemáticas de espacio público</h2>
+      <h2>
+        <span class="titulo-boton">
+          <span class="icono">🏙️</span> Problemáticas de espacio público
+        </span>
+      </h2>
 
       <div class="problema">
         <img src="PV_1.png" alt="Vía con baches y deterioro del pavimento">
@@ -157,7 +139,7 @@
     <p><strong>NIT:</strong> 901234567-8</p>
   </footer>
 
-  <!-- ===== Script ===== -->
+  <!-- ===== Script de gráficas (sin cambios) ===== -->
   <script>
     const ctxPM = document.getElementById("graficaPM").getContext("2d");
     const ctxGases = document.getElementById("graficaGases").getContext("2d");
@@ -200,8 +182,18 @@
     function graficar(registros, mes){
       if(chartPM) chartPM.destroy();
       if(chartGases) chartGases.destroy();
-      chartPM = new Chart(ctxPM,{type:"line",data:agrupar(registros,["PM10","PM2.5"]),options:{plugins:{title:{display:true,text:"PM10 / PM2.5 por estación — "+mes,font:{size:22}}}}});
-      chartGases = new Chart(ctxGases,{type:"line",data:agrupar(registros,null),options:{plugins:{title:{display:true,text:"Otros gases por estación — "+mes,font:{size:22}}}}});
+
+      chartPM = new Chart(ctxPM,{
+        type:"line",
+        data: agrupar(registros,["PM10","PM2.5"]),
+        options:{ plugins:{ title:{ display:true, text:"PM10 / PM2.5 por estación — "+mes, font:{ size:22 }}}}
+      });
+
+      chartGases = new Chart(ctxGases,{
+        type:"line",
+        data: agrupar(registros,null),
+        options:{ plugins:{ title:{ display:true, text:"Otros gases por estación — "+mes, font:{ size:22 }}}}
+      });
     }
 
     document.getElementById("mesSelect").addEventListener("change",e=>cargarDatos(e.target.value));

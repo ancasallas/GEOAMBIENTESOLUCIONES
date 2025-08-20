@@ -4,36 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Vías Barrio El Vergel</title>
-    <link rel="stylesheet" href="estilos.css" />
+
+    <!-- Estilos externos -->
+    <link rel="stylesheet" href="est_vias.css" />
 
     <!-- Leaflet CSS -->
     <link
         rel="stylesheet"
         href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     />
-
-    <style>
-        /* Estilos para el contenedor del mapa */
-        #map {
-            height: 100vh;
-            width: 100%;
-        }
-
-        /* Título del mapa debajo del menú */
-        .map-title {
-            margin: 0 auto;
-            margin-top: 10px;
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.85);
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-size: 24px;
-            color: #2c3e50;
-            font-weight: bold;
-            width: fit-content;
-            z-index: 1000;
-        }
-    </style>
 </head>
 <body>
     <!-- Encabezado con logo y título -->
@@ -45,25 +24,35 @@
     <!-- Menú Desplegable -->
     <nav>
         <ul class="menu">
-        <li class="menu-item"><a href="index.html">Inicio</a></li>
-        <li class="menu-item has-submenu">
+          <li class="menu-item"><a href="index.html">Inicio</a></li>
+          <li class="menu-item has-submenu">
             <a href="#">Equipamientos</a>
             <ul class="submenu">
-            <li><a href="#">Ubicación</a></li>
-            <li><a href="Movilidad.html">Movilidad</a></li>
-            <li><a href="#">Parques</a></li>
-            <li><a href="Catastro3D.html">Catastro 3D</a></li>
-            <li><a href="tour_persona.html">Recorrido virtual</a></li>
-            <li><a href="vias.html">Vías</a></li>
+              <li><a href="ubicacion.html">Ubicación</a></li>
+              <li><a href="Movilidad.html">Movilidad</a></li>
+              <li><a href="parques.html">Parques</a></li>
+              <li><a href="Catastro3D.html">Catastro 3D</a></li>
+              <li><a href="tour_persona.html">Recorrido virtual</a></li>
+              <li><a href="vias.html">Vías</a></li>
             </ul>
-        </li>
-        <li class="menu-item"><a href="problematicas_1.html">Problemáticas</a></li>
-        <li class="menu-item"><a href="#">Acerca de</a></li>
+          </li>
+          <li class="menu-item"><a href="problematicas_1.html">Problemáticas</a></li>
+          <li class="menu-item"><a href="#">Acerca de</a></li>
         </ul>
     </nav>
 
-    <!-- Título del mapa debajo del menú -->
-    <div id="subtitulo">VÍAS BARRIO EL VERGEL</div>
+    <!-- ===== Contenedor principal ===== -->
+    <div class="contenedor-vias">
+      <!-- ===== Botón destacado Vías ===== -->
+      <h2 id="titulo-vias">
+        🚧 Vías
+      </h2>
+
+      <!-- ===== Subtítulo Barrio ===== -->
+      <h3 class="titulo-secundario">
+        🏠 BARRIO EL VERGEL ORIENTAL KENNEDY BOGOTÁ
+      </h3>
+    </div>
 
     <!-- Contenedor del mapa -->
     <div id="map"></div>
@@ -78,7 +67,7 @@
         const lng = -74.14431585587414;
         const zoomLevel = 16.3;
 
-        // Inicialización del mapa centrado en las coordenadas deseadas
+        // Inicialización del mapa
         const map = L.map('map').setView([lat, lng], zoomLevel);
 
         // Capa base OpenStreetMap
@@ -86,28 +75,25 @@
             attribution: '&copy; OpenStreetMap contributors',
         }).addTo(map);
 
-        // ---------- NUEVO: Cargar polígono BARRIO ----------
-        fetch('BARRIO.geojson') // Asegúrate que este archivo exista en tu servidor/ruta
+        // Polígono del barrio
+        fetch('BARRIO.geojson')
           .then(resp => resp.json())
           .then(geojson => {
             const barrioLayer = L.geoJSON(geojson, {
               style: {
-                color: '#1f78b4',     // borde
+                color: '#1f78b4',
                 weight: 2,
-                fillColor: '#1f78b4', // relleno
+                fillColor: '#1f78b4',
                 fillOpacity: 0.15
               },
               onEachFeature: function (feature, layer) {
-                // Popup con nombre si existe; si no, un título genérico
                 const nombre = (feature.properties && (feature.properties.nombre || feature.properties.name || feature.properties.NOMBRE)) || 'Barrio El Vergel';
                 layer.bindPopup(`<strong>${nombre}</strong>`);
               }
             }).addTo(map);
 
-            // Enviar el polígono al fondo para que las vías queden encima
             barrioLayer.bringToBack();
 
-            // Centrar vista al polígono (opcional)
             try {
               const bounds = barrioLayer.getBounds();
               if (bounds.isValid()) {
@@ -118,10 +104,9 @@
             }
           })
           .catch(err => console.error('Error al cargar BARRIO.geojson:', err));
-        // ----------------------------------------------------
 
-        // Carga del GeoJSON de VÍAS desde el servidor
-        fetch('Vias_Vergel.geojson') // Ajusta ruta si es necesario
+        // Vías del barrio
+        fetch('Vias_Vergel.geojson')
             .then((response) => response.json())
             .then((data) => {
                 L.geoJSON(data, {
@@ -135,16 +120,19 @@
                 console.error('Error al cargar el GeoJSON de Vías:', error);
             });
     </script>
+
+    <!-- Footer -->
     <footer class="contacto">
-    <h3>GEOAMBIENTES SOLUCIONES</h3>
-    <p><strong>Dirección:</strong> Calle 45 # 20-15, Bogotá, Colombia</p>
-    <p><strong>Código postal:</strong> 111321</p>
-    <p><strong>Horarios de atención al ciudadano:</strong> Lunes a viernes de 8:00 a.m. a 4:30 p.m.</p>
-    <p><strong>Teléfono conmutador:</strong> +57 (601) 456 78 90 Ext.101 y 102</p>
-    <p><strong>Línea gratuita:</strong> 01-8000-112233</p>
-    <p><strong>Correo de contacto:</strong> servicio@geoambientes.com.co</p>
-    <p><strong>Radicación virtual:</strong> radicacion@geoambientes.com.co</p>
-    <p><strong>NIT:</strong> 901234567-8</p>
-  </footer>
+      <h3>GEOAMBIENTES SOLUCIONES</h3>
+      <p><strong>Dirección:</strong> Calle 45 # 20-15, Bogotá, Colombia</p>
+      <p><strong>Código postal:</strong> 111321</p>
+      <p><strong>Horarios de atención:</strong> Lunes a viernes de 8:00 a.m. a 4:30 p.m.</p>
+      <p><strong>Teléfono:</strong> +57 (601) 456 78 90 Ext.101 y 102</p>
+      <p><strong>Línea gratuita:</strong> 01-8000-112233</p>
+      <p><strong>Correo:</strong> servicio@geoambientes.com.co</p>
+      <p><strong>Radicación:</strong> radicacion@geoambientes.com.co</p>
+      <p><strong>NIT:</strong> 901234567-8</p>
+    </footer>
 </body>
 </html>
+

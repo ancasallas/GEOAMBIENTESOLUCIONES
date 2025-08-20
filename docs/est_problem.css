@@ -191,4 +191,109 @@ footer.contacto p {
   .problema img, .problema .texto {
     width: 100%;
   }
+  /* ===== Botón Catastro 3D ===== */
+#titulo-Catastro3D {
+  display: inline-block;
+  padding: 14px 28px;x
+  border: 3px solid #2e7d32;
+  border-radius: 10px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #2e7d32;
+  background: #f1f8f4;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+  margin: 20px auto 10px auto;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;   /* espacio entre ícono y texto */
+  max-width: fit-content;
 }
+
+/* ===== Subtítulo Barrio ===== */
+.titulo-secundario {
+  text-align: center;      /* Centrar el texto */
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+  margin: 8px 0 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centra icono + texto */
+  gap: 8px;
+}
+
+}
+/* ===== Botón/etiqueta para títulos ===== */
+.titulos-principales { text-align: center; margin: 16px auto 10px; }
+
+.titulo-boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;              /* forma de pastilla */
+  background: #1b5e20;               /* verde institucional */
+  color: #ffffff;
+  font-weight: 800;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  border: 2px solid #145017;
+  box-shadow: 0 6px 16px rgba(0,0,0,.12);
+  user-select: none;
+}
+.titulo-boton .icono { margin-right: 6px; }
+.titulo-boton:hover { filter: brightness(.96); transform: translateY(-1px); }
+.titulo-boton:active { transform: translateY(0); }
+
+/* Variante clara (si alguna vez la necesitas) */
+.titulo-boton--claro {
+  background: #F6F2EF;
+  color: #1b5e20;
+  border: 2px solid #1b5e20;
+}
+
+/* Subtítulos debajo del botón */
+.titulo-secundario {
+  margin: 10px 0 4px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+
+/* Encabezado de la sección Problemáticas */
+.bloque-problematicas h2 .titulo-boton {
+  margin: 0 auto 8px;
+}
+/* ===== Botón estilo claro (similar a Parques y Humedales) ===== */
+.titulo-boton-claro {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  background: #ffffff;              /* fondo blanco */
+  color: #1b5e20;                   /* verde oscuro */
+  font-weight: 700;
+  border: 2px solid #1b5e20;        /* borde verde */
+  box-shadow: 0 3px 6px rgba(0,0,0,.1);
+}
+.titulo-boton-claro .icono { margin-right: 6px; }
+.titulo-boton-verde {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: #f9fff9;   /* Fondo interno claro */
+  color: #1b5e20;
+  font-weight: 700;
+  border: 2px solid #1b5e20;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.titulo-boton-verde .icono {
+  margin-right: 6px;
+}
+

@@ -2,7 +2,7 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #F6F2EF; /* fondo claro de la página */
+  background-color: #F6F2EF;
 }
 
 /* ===== Encabezado ===== */
@@ -24,42 +24,42 @@ header h1 {
 
 /* ===== Barra de navegación ===== */
 nav {
-  background-color: #e9e6e1;        /* un poco más oscuro que el fondo para resaltar */
-  border-bottom: 4px solid #1b5e20; /* línea verde debajo del menú */
+  background-color: #e9e6e1;
+  border-bottom: 4px solid #1b5e20;
   padding: 0;
   position: relative;
-  z-index: 2000;                     /* por encima del mapa */
+  z-index: 2000;
 }
 
 .menu {
   list-style: none;
   display: flex;
-  justify-content: center;           /* items centrados */
+  justify-content: center;
   margin: 0;
   padding: 0;
 }
 
 .menu-item {
   position: relative;
-  border-right: 1px solid #d3d0cb;   /* separador tenue entre items */
+  border-right: 1px solid #d3d0cb;
 }
 
 .menu-item > a {
   display: block;
-  padding: 18px 28px;                /* aire similar a la referencia */
+  padding: 18px 28px;
   background-color: #e9e6e1;
-  color: #3a3a3a;                    /* gris oscuro del texto */
-  font-size: 15px;                   /* tamaño como en la imagen */
-  font-weight: 500;                  /* un poco más delgada */
-  text-transform: uppercase;         /* mayúsculas */
-  letter-spacing: 0.5px;             /* espaciado entre letras */
+  color: #3a3a3a;
+  font-size: 15px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   text-decoration: none;
   white-space: nowrap;
 }
 
 .menu-item:hover > a,
 .menu-item:focus-within > a {
-  background-color: #dcd9d3;         /* hover más oscuro */
+  background-color: #dcd9d3;
 }
 
 /* ===== Submenú ===== */
@@ -72,10 +72,10 @@ nav {
   margin: 0;
   padding: 6px 0;
   list-style: none;
-  background-color: #fdfaf6;         /* blanco cremoso */
+  background-color: #fdfaf6;
   border: 1px solid #ccc;
   box-shadow: 0 8px 16px rgba(0,0,0,.15);
-  z-index: 3000;                      /* sobre el mapa */
+  z-index: 3000;
   border-radius: 4px;
 }
 
@@ -86,11 +86,11 @@ nav {
   text-decoration: none;
   font-size: 14px;
   font-weight: 400;
-  text-transform: none;               /* submenú en minúsculas */
+  text-transform: none;
 }
 
 .submenu li a:hover {
-  background-color: #f3f0eb;         /* crema un poco más oscuro al pasar */
+  background-color: #f3f0eb;
 }
 
 .menu-item:hover .submenu,
@@ -98,28 +98,48 @@ nav {
   display: block;
 }
 
-/* ===== Títulos de sección ===== */
-/* “Movilidad”: centrado y más separado del menú */
-#subtitulo {
+/* ===== Contenedor centrado ===== */
+.contenedor-vias {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  font-size: 20px;                 
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: #3a3a3a;
-  margin-top: 40px;   /* separación extra bajo el menú desplegable */
-  margin-bottom: 15px;
+  margin-top: 20px;
 }
 
-/* “Rutas del SITP”: alineado a la izquierda */
-#subtitulo-secundario {
-  text-align: left;
-  font-size: 15px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: #3a3a3a;
-  margin: 10px 0 8px 20px; /* margen izquierdo para alinear */
+/* ===== Botón Vías ===== */
+#titulo-vias {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border: 2px solid #2e7d32;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2e7d32;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#titulo-vias:hover {
+  background: #f1f8f4;
+}
+
+/* ===== Subtítulo Barrio ===== */
+.titulo-secundario {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 8px;
 }
 
 /* ===== Mapa ===== */
@@ -127,8 +147,11 @@ nav {
   height: 100vh;
   width: 100%;
   position: relative;
-  z-index: 1;}
-  footer.contacto {
+  z-index: 1;
+}
+
+/* ===== Footer ===== */
+footer.contacto {
   background: #1b4332;
   color: white;
   padding: 25px 20px;
@@ -145,60 +168,6 @@ footer.contacto p {
   margin: 5px 0;
   font-size: 0.95rem;
 }
-#map {
-  height: 420px;
-  margin: 20px auto;
-  border: 2px solid #dcdcdc;
-  border-radius: 10px;
-}
-.analisis {
-  max-width: 1200px;
-  margin: 20px auto;
-  background: #fff;
-  padding: 25px 30px;
-  border-radius: 12px;
-  border: 1px solid #e8e8e8;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-  line-height: 1.7;
-  text-align: center;
-  font-size: 1.15em;
-}
-.grafica {
-  max-width: 1000px;
-  margin: 35px auto;
-}
-.grafica canvas {
-  display: block;
-  margin: 0 auto;
-  width: 100% !important;
-  height: 500px !important;
-}
-.problema {
-  display: flex;
-  align-items: center;
-  max-width: 1100px;
-  margin: 25px auto;
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid #ddd;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-}
-.problema.inversa {
-  flex-direction: row-reverse;
-}
-.problema .imagen img {
-  width: 350px;
-  height: auto;
-  object-fit: cover;
-}
-.problema .descripcion {
-  padding: 25px;
-  flex: 1;
-  font-size: 1.2em;
-  line-height: 1.8;
-}
-.problema .descripcion h3 {
-  font-size: 1.5em;
-  margin-bottom: 12px;
-}
+
+
+
