@@ -5,71 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>GeoAmbientes Soluciones - Problemáticas</title>
 
+  <!-- Archivos de estilos -->
   <link rel="stylesheet" href="est_problem.css" />
+  <link rel="stylesheet" href="est_vias.css" />
+
+  <!-- Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+  <!-- Gráficas -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.3.1/dist/chartjs-adapter-luxon.umd.min.js"></script>
 
   <style>
-    #map {
-      height: 420px;
-      margin: 20px auto;
-      border: 2px solid #dcdcdc;
-      border-radius: 10px;
-    }
-    .analisis {
-      max-width: 1200px;
-      margin: 20px auto;
-      background: #fff;
-      padding: 25px 30px;
-      border-radius: 12px;
-      border: 1px solid #e8e8e8;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-      line-height: 1.7;
-      text-align: center;
-      font-size: 1.15em;
-    }
-    .grafica {
-      max-width: 1000px;
-      margin: 35px auto;
-    }
-    .grafica canvas {
-      display: block;
-      margin: 0 auto;
-      width: 100% !important;
-      height: 500px !important;
-    }
-    .problema {
-      display: flex;
-      align-items: center;
-      max-width: 1100px;
-      margin: 25px auto;
-      background: #fff;
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1px solid #ddd;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-    }
-    .problema.inversa {
-      flex-direction: row-reverse;
-    }
-    .problema .imagen img {
-      width: 350px;
-      height: auto;
-      object-fit: cover;
-    }
-    .problema .descripcion {
-      padding: 25px;
-      flex: 1;
-      font-size: 1.2em;
-      line-height: 1.8;
-    }
-    .problema .descripcion h3 {
-      font-size: 1.5em;
-      margin-bottom: 12px;
+    /* Estilo del control dentro del mapa */
+    .distancia-control {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 8px 15px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #2c3e50;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
   </style>
 </head>
@@ -104,52 +62,6 @@
     <h2 class="titulo-principal">Mapa ubicación estación de monitoreo del aire más cerca al barrio El Vergel</h2>
     <div id="map" data-zoom="16" data-center="4.628,-74.158"></div>
 
-    <section class="analisis">
-      <h2 class="titulo-principal">Análisis de la Calidad del Aire en el barrio El Vergel (Kennedy)</h2>
-      <p>El barrio <strong>El Vergel</strong>, en la localidad de <strong>Kennedy</strong>, se encuentra en una zona de alta densidad poblacional y con una importante carga vehicular, lo que impacta directamente en la calidad del aire.</p>
-      <p>Las estaciones de monitoreo más cercanas registran niveles elevados de material particulado (PM10 y PM2.5), lo cual constituye una de las principales problemáticas ambientales y de salud pública en el sector.</p>
-
-      <div class="grafica">
-        <canvas id="graficaPromedios"></canvas>
-      </div>
-      <div class="grafica">
-        <canvas id="graficaTemporal"></canvas>
-      </div>
-    </section>
-
-    <h2 class="titulo-principal">Problemáticas del Espacio Público</h2>
-
-    <section class="problema fila">
-      <div class="imagen">
-        <img src="PV_1.png" alt="Huecos en la vía" loading="lazy"/>
-      </div>
-      <div class="descripcion">
-        <h3>Huecos en la vía principal</h3>
-        <p>El mal estado de las calles genera riesgos para vehículos y peatones, afectando la movilidad.</p>
-      </div>
-    </section>
-
-    <section class="problema fila inversa">
-      <div class="imagen">
-        <img src="PV_2.png" alt="Zona sin pavimentar" loading="lazy"/>
-      </div>
-      <div class="descripcion">
-        <h3>Zona sin pavimentar</h3>
-        <p>La falta de pavimentación en algunas calles representa una barrera de accesibilidad, 
-        especialmente en temporada de lluvias.</p>
-      </div>
-    </section>
-
-    <section class="problema fila">
-      <div class="imagen">
-        <img src="ANDEN.png" alt="Andén roto" loading="lazy"/>
-      </div>
-      <div class="descripcion">
-        <h3>Andén roto y peligroso</h3>
-        <p>El mal estado de los andenes es un riesgo para los peatones, en especial adultos mayores y personas con discapacidad.</p>
-      </div>
-    </section>
-
   </main>
 
   <script>
@@ -162,6 +74,10 @@
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap'
     }).addTo(map);
+
+    // Punto de referencia en El Vergel
+    const puntoVergel = [4.646432890459664, -74.14431585587414];
+    L.marker(puntoVergel).addTo(map).bindPopup("Punto de referencia (Vergel)");
 
     fetch("kennedy_estaciones.geojson")
       .then(r => r.json())
@@ -188,65 +104,47 @@
           }
         }).addTo(map);
 
-        if (capa.getBounds().isValid()) {
-          map.fitBounds(capa.getBounds(), { padding: [20, 20] });
-        }
-
-        const promedios = {};
-        const series = {};
+        // Buscar la estación más cercana al punto Vergel
+        let estacionCercana = null;
+        let distanciaMin = Infinity;
         features.forEach(f => {
-          const p = f.properties || {};
-          const c = p.contaminante;
-          const v = parseFloat(p.valor);
-          const fecha = p.fecha_hora;
-          if (!isNaN(v)) {
-            if (!promedios[c]) promedios[c] = [];
-            promedios[c].push(v);
-            if (c === "PM10" || c === "PM2.5") {
-              if (!series[c]) series[c] = [];
-              series[c].push({ x: fecha, y: v });
-            }
+          const coords = f.geometry.coordinates; // [lng, lat]
+          const estacionLatLng = [coords[1], coords[0]];
+          const dist = map.distance(estacionLatLng, puntoVergel);
+          if (dist < distanciaMin) {
+            distanciaMin = dist;
+            estacionCercana = estacionLatLng;
           }
         });
 
-        const ctx1 = document.getElementById("graficaPromedios").getContext("2d");
-        new Chart(ctx1, {
-          type: "bar",
-          data: {
-            labels: Object.keys(promedios),
-            datasets: [{
-              label: "Promedio",
-              data: Object.values(promedios).map(arr => arr.reduce((a,b)=>a+b,0)/arr.length),
-              backgroundColor: "rgba(52, 152, 219, 0.7)"
-            }]
-          },
-          options: { responsive: true, plugins: { legend: { display: false } } }
-        });
+        if (estacionCercana) {
+          const linea = L.polyline([estacionCercana, puntoVergel], {
+            color: "blue",
+            weight: 3,
+            dashArray: "6,6"
+          }).addTo(map);
 
-        const ctx2 = document.getElementById("graficaTemporal").getContext("2d");
-        new Chart(ctx2, {
-          type: "line",
-          data: {
-            datasets: Object.keys(series).map(c => ({
-              label: c,
-              data: series[c],
-              fill: false,
-              borderColor: c === "PM10" ? "red" : "green",
-              borderWidth: 3
-            }))
-          },
-          options: {
-            responsive: true,
-            scales: {
-              x: { type: "time", time: { unit: "day" } },
-              y: { beginAtZero: true }
-            }
-          }
-        });
+          // Calcular distancia
+          const distancia = distanciaMin.toFixed(0);
+
+          // Control personalizado para mostrar la distancia en el mapa
+          const DistanciaControl = L.control({ position: "bottomleft" });
+          DistanciaControl.onAdd = function () {
+            const div = L.DomUtil.create("div", "distancia-control");
+            div.innerHTML = `📏 Distancia entre el Vergel y la estación más cercana: <b>${distancia} m</b>`;
+            return div;
+          };
+          DistanciaControl.addTo(map);
+
+          // Ajustar el zoom para mostrar ambos puntos
+          const bounds = L.latLngBounds([estacionCercana, puntoVergel]);
+          map.fitBounds(bounds, { padding: [40, 40] });
+        }
       })
       .catch(err => console.error("Error cargando GeoJSON:", err));
   </script>
-    <footer class="contacto">
+
+  <footer class="contacto">
     <h3>GEOAMBIENTES SOLUCIONES</h3>
     <p><strong>Dirección:</strong> Calle 45 # 20-15, Bogotá, Colombia</p>
     <p><strong>Código postal:</strong> 111321</p>

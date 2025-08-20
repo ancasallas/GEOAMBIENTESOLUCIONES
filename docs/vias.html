@@ -86,7 +86,41 @@
             attribution: '&copy; OpenStreetMap contributors',
         }).addTo(map);
 
-        // Carga del GeoJSON desde el servidor
+        // ---------- NUEVO: Cargar polígono BARRIO ----------
+        fetch('BARRIO.geojson') // Asegúrate que este archivo exista en tu servidor/ruta
+          .then(resp => resp.json())
+          .then(geojson => {
+            const barrioLayer = L.geoJSON(geojson, {
+              style: {
+                color: '#1f78b4',     // borde
+                weight: 2,
+                fillColor: '#1f78b4', // relleno
+                fillOpacity: 0.15
+              },
+              onEachFeature: function (feature, layer) {
+                // Popup con nombre si existe; si no, un título genérico
+                const nombre = (feature.properties && (feature.properties.nombre || feature.properties.name || feature.properties.NOMBRE)) || 'Barrio El Vergel';
+                layer.bindPopup(`<strong>${nombre}</strong>`);
+              }
+            }).addTo(map);
+
+            // Enviar el polígono al fondo para que las vías queden encima
+            barrioLayer.bringToBack();
+
+            // Centrar vista al polígono (opcional)
+            try {
+              const bounds = barrioLayer.getBounds();
+              if (bounds.isValid()) {
+                map.fitBounds(bounds, { padding: [20, 20] });
+              }
+            } catch (e) {
+              console.warn('No se pudieron calcular los límites del polígono:', e);
+            }
+          })
+          .catch(err => console.error('Error al cargar BARRIO.geojson:', err));
+        // ----------------------------------------------------
+
+        // Carga del GeoJSON de VÍAS desde el servidor
         fetch('Vias_Vergel.geojson') // Ajusta ruta si es necesario
             .then((response) => response.json())
             .then((data) => {
@@ -98,7 +132,7 @@
                 }).addTo(map);
             })
             .catch((error) => {
-                console.error('Error al cargar el GeoJSON:', error);
+                console.error('Error al cargar el GeoJSON de Vías:', error);
             });
     </script>
     <footer class="contacto">

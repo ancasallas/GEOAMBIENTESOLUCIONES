@@ -105,3 +105,18 @@ const ZOOM_KENNEDY = 20;
       "Se muestra el dataset completo y se centra el mapa en Kennedy."
     );
   }
+if (estacionCercana) {
+  const linea = L.polyline([estacionCercana, puntoVergel], {
+    color: "blue",
+    weight: 3,
+    dashArray: "6,6"
+  }).addTo(map);
+
+  // Calcular distancia en metros
+  const distancia = map.distance(estacionCercana, puntoVergel).toFixed(0);
+  linea.bindPopup(`Distancia: ${distancia} metros`);
+
+  // ---- NUEVO: Ajustar el zoom para que se vean ambos puntos ----
+  const bounds = L.latLngBounds([estacionCercana, puntoVergel]);
+  map.fitBounds(bounds, { padding: [40, 40] });
+}
